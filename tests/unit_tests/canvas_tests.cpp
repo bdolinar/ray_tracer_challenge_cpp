@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 
-#include <raytracer/canvas.h>
-#include <raytracer/tuple.h>
+#include "canvas.h"
+#include "tuple.h"
 
 namespace {
 
@@ -54,7 +54,7 @@ TEST_CASE("Writing pixels to a canvas", "[canvas]")
 TEST_CASE("Constructing the PPM header", "[canvas]")
 {
   Canvas c(5, 3);
-  std::string ppm = c.ToPpmText();
+  std::string ppm = c.ToPpmString();
   std::string ppm_lines = ExtractLines(ppm, 1, 3);
   std::string expected_ppm_lines = 
     "P3\n"
@@ -72,7 +72,7 @@ TEST_CASE("Constructing the PPM pixel data", "[canvas]")
   c.WritePixel(0, 0, c1);
   c.WritePixel(2, 1, c2);
   c.WritePixel(4, 2, c3);
-  std::string ppm = c.ToPpmText();
+  std::string ppm = c.ToPpmString();
   std::string ppm_lines = ExtractLines(ppm, 4, 6);
   std::string expected_ppm_lines = 
     "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n"
@@ -85,7 +85,7 @@ TEST_CASE("Splitting long lines in PPM files", "[canvas]")
 {
   Canvas c(10, 2);
   c.SetAllPixelColors(Color(1, 0.8, 0.6));
-  std::string ppm = c.ToPpmText();
+  std::string ppm = c.ToPpmString();
   std::string ppm_lines = ExtractLines(ppm, 4, 7);
   std::string expected_ppm_lines = 
     "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204\n"
@@ -98,6 +98,6 @@ TEST_CASE("Splitting long lines in PPM files", "[canvas]")
 TEST_CASE("PPM files are terminated by a newline", "[canvas]")
 {
   Canvas c(5, 3);
-  std::string ppm = c.ToPpmText();
+  std::string ppm = c.ToPpmString();
   CHECK(EndsInNewLine(ppm));
 }

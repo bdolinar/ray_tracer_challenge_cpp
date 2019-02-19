@@ -1,4 +1,4 @@
-include_directories(SYSTEM ${CMAKE_CURRENT_LIST_DIR})
+include_directories(${CMAKE_CURRENT_LIST_DIR})
 
 set(raytracer_headers
   raytracer/canvas.h

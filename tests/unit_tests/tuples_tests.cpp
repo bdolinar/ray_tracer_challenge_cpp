@@ -2,8 +2,8 @@
 
 #include <catch2/catch.hpp>
 
-#include <raytracer/color.h>
-#include <raytracer/tuple.h>
+#include "color.h"
+#include "tuple.h"
 
 
 TEST_CASE("A tuple with w=1.0 is a point", "[tuples]")
@@ -138,7 +138,7 @@ TEST_CASE("Normalizing vector(4, 0, 0) gives (1, 0, 0)", "[tuples]")
 TEST_CASE("Normalizing vector(1, 2, 3)", "[tuples]")
 {
   Tuple v = Vector(1, 2, 3);
-  CHECK(AproximatelyEqual(v.Normalize(), Vector(0.26726, 0.53452, 0.80178)));
+  CHECK(ApproximatelyEqual(v.Normalize(), Vector(0.26726, 0.53452, 0.80178)));
 }
 
 TEST_CASE("The magnitude of a normalized vector", "[tuples]")

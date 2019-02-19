@@ -1,35 +1,35 @@
-#include <raytracer/canvas.h>
+#include "canvas.h"
 
 #include <sstream>
 
 namespace
 {
-int scale_fraction(double val, int scale_to)
+int ScaleFraction(double val, int upperValue)
 {
-  int result = val * (scale_to + 1);
-  if (result > scale_to)
-    result = scale_to;
+  int result = val * (upperValue + 1);
+  if (result > upperValue)
+    result = upperValue;
   else if (result < 0)
     result = 0;
   return result;
 }
 
-void write_ppm_value(std::ostream& out, int value, int& line_length)
+void WritePpmValue(std::ostream& out, int value, int& lineLength)
 {
-  std::string out_value = std::to_string(value);
-  int value_length = (int)out_value.size();
-  if (line_length + value_length + 1 > 70)
+  std::string outValue = std::to_string(value);
+  int valueLength = (int)outValue.size();
+  if (lineLength + valueLength + 1 > 70)
   {
     out << '\n';
-    line_length = 0;
+    lineLength = 0;
   }
-  if (line_length != 0)
+  if (lineLength != 0)
   {
     out << " ";
-    ++line_length;
+    ++lineLength;
   }
   out << value;
-  line_length += value_length;
+  lineLength += valueLength;
 }
 
 } // namespace
@@ -77,26 +77,31 @@ void Canvas::SetAllPixelColors(const Color& color)
   }
 }
 
-std::string Canvas::ToPpmText() const
+void Canvas::ToPpmFile(std::ostream& output) const
 {
-  std::ostringstream out;
-  out << "P3\n";
-  out << width_ << " " << height_ << "\n";
-  out << "255\n";
+  output << "P3\n";
+  output << width_ << " " << height_ << "\n";
+  output << "255\n";
 
   for (auto& row : pixels_)
   {
-    int line_length = 0;
+    int lineLength = 0;
     for (auto& pixel : row)
     {
-      int red = scale_fraction(pixel.Red(), 255);
-      write_ppm_value(out, red, line_length);
-      int green = scale_fraction(pixel.Green(), 255);
-      write_ppm_value(out, green, line_length);
-      int blue = scale_fraction(pixel.Blue(), 255);
-      write_ppm_value(out, blue, line_length);
+      int red = ScaleFraction(pixel.Red(), 255);
+      WritePpmValue(output, red, lineLength);
+      int green = ScaleFraction(pixel.Green(), 255);
+      WritePpmValue(output, green, lineLength);
+      int blue = ScaleFraction(pixel.Blue(), 255);
+      WritePpmValue(output, blue, lineLength);
     }
-    out << '\n';
+    output << '\n';
   }
+}
+
+std::string Canvas::ToPpmString() const
+{
+  std::ostringstream out;
+  ToPpmFile(out);
   return out.str();
 }

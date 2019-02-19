@@ -1,7 +1,8 @@
 #pragma once
 
-#include <raytracer/color.h>
+#include "color.h"
 
+#include <fstream>
 #include <vector>
 
 /// Canvas that pixels are stored in.
@@ -43,8 +44,12 @@ public:
   void SetAllPixelColors(const Color& color);
 
   /// \brief Export canvas to PPM file.
+  /// \param[in] output The output stream to write the file too.
+  void ToPpmFile(std::ostream& output) const;
+
+  /// \brief Export canvas to PPM file.
   /// \return The PPM file contents as a string.
-  std::string ToPpmText() const;
+  std::string ToPpmString() const;
 
 private:
   int width_ = 0;                          ///< The number of pixels in horizontal direction.

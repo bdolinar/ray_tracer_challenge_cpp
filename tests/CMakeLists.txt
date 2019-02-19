@@ -1,5 +1,5 @@
-include_directories(SYSTEM ${CMAKE_SOURCE_DIR}/raytracer)
-include_directories(SYSTEM ${CMAKE_CURRENT_LIST_DIR})
+include_directories(${CMAKE_SOURCE_DIR}/raytracer/raytracer)
+include_directories(${CMAKE_CURRENT_LIST_DIR})
 
 add_executable(run_tests
   main.cpp

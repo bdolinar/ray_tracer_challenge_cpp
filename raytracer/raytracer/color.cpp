@@ -5,7 +5,8 @@
 
 namespace
 {
-static bool equal_to_digits(double a, double b, int digits)
+
+bool EqualToDigits(double a, double b, int digits)
 {
   double positiveDiff = fabs(a - b);
   double positiveMax = pow(0.1, digits) * std::max(fabs(a), fabs(b));
@@ -16,9 +17,9 @@ static bool equal_to_digits(double a, double b, int digits)
 
 bool Color::operator==(const Color& rhs) const
 {
-  bool equalRed = equal_to_digits(red_, rhs.red_, 10);
-  bool equalGreen = equal_to_digits(green_, rhs.green_, 10);
-  bool equalBlue = equal_to_digits(blue_, rhs.blue_, 10);
+  bool equalRed = EqualToDigits(red_, rhs.red_, 10);
+  bool equalGreen = EqualToDigits(green_, rhs.green_, 10);
+  bool equalBlue = EqualToDigits(blue_, rhs.blue_, 10);
   return equalRed && equalGreen && equalBlue;
 }
 
