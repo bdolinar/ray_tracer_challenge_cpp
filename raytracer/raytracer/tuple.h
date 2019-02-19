@@ -98,13 +98,21 @@ inline Tuple operator-(const Tuple& a)
 /// \param[in] x The X value.
 /// \param[in] y The Y value.
 /// \param[in] z The Z value.
-Tuple Point(double x, double y, double z);
+inline Tuple Point(double x, double y, double z)
+{
+  Tuple p(x, y, z, 1.0);
+  return p;
+}
 
 /// \brief Construct a vector tuple.
 /// \param[in] x The X value.
 /// \param[in] y The Y value.
 /// \param[in] z The Z value.
-Tuple Vector(double x, double y, double z);
+inline Tuple Vector(double x, double y, double z)
+{
+  Tuple v(x, y, z, 0.0);
+  return v;
+}
 
 /// \brief Calculate the dot product of two vector tuples.
 /// \param[in] a The tuple operand.

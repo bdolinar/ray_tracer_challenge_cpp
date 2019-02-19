@@ -5,7 +5,6 @@
 
 namespace
 {
-
 bool EqualToDigits(double a, double b, int digits)
 {
   double positiveDiff = fabs(a - b);
@@ -15,6 +14,7 @@ bool EqualToDigits(double a, double b, int digits)
 
 } // namespace
 
+
 bool Color::operator==(const Color& rhs) const
 {
   bool equalRed = EqualToDigits(red_, rhs.red_, 10);
@@ -22,6 +22,7 @@ bool Color::operator==(const Color& rhs) const
   bool equalBlue = EqualToDigits(blue_, rhs.blue_, 10);
   return equalRed && equalGreen && equalBlue;
 }
+
 
 Color color(double red, double green, double blue)
 {
