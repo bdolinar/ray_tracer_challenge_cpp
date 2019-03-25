@@ -1,8 +1,8 @@
 
 #pragma once
 
-#include "color.h"
-#include "tuple.h"
+#include <raytracer/color.h>
+#include <raytracer/tuple.h>
 
 class Light
 {

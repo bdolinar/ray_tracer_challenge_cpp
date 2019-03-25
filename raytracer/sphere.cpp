@@ -1,8 +1,6 @@
-#include "sphere.h"
+#include <raytracer/sphere.h>
 
-#include "intersection.h"
-#include "matrix.h"
-#include "ray.h"
+#include <raytracer/intersection.h>
 
 
 Sphere::Sphere()

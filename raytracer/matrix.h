@@ -2,7 +2,7 @@
 
 #include <array>
 
-#include "tuple.h"
+#include <raytracer/tuple.h>
 
 class MatrixRow
 {

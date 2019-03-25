@@ -1,8 +1,6 @@
-#include "transform.h"
+#include <raytracer/transform.h>
 
-#include <math.h>
-
-#include "matrix.h"
+#include <raytracer/matrix.h>
 
 
 Matrix Translation(double xTranslation, double yTranslation, double zTranslation)

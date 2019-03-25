@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 
-#include "matrix.h"
-#include "transform.h"
+#include <raytracer/matrix.h>
+#include <raytracer/transform.h>
 
 TEST_CASE("Multiplying by a translation matrix", "[transformations]")
 {

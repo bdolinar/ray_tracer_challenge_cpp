@@ -1,4 +1,4 @@
-#include "light.h"
+#include <raytracer/light.h>
 
 
 Light::Light(const Tuple& position, const Color& intensity)

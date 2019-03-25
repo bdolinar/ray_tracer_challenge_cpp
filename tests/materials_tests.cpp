@@ -1,8 +1,7 @@
 #include <catch2/catch.hpp>
 
-#include "light.h"
-#include "material.h"
-#include "tuple.h"
+#include <raytracer/light.h>
+#include <raytracer/material.h>
 
 
 TEST_CASE("The default material", "[materials]")
@@ -60,7 +59,7 @@ TEST_CASE("Lighting with eye opposite surface, light offset 45°", "[materials]"
   Tuple normalv = Vector(0, 0, -1);
   Light light(Point(0, 10, -10), Color(1, 1, 1));
   Color result = Lighting(m, light, position, eyev, normalv);
-  CHECK(result == Color(0.7364, 0.7364, 0.7364));
+  CHECK(ApproximatelyEqual(result, Color(0.7364, 0.7364, 0.7364)));
 }
 
 TEST_CASE("Lighting with eye in the path of the reflection vector", "[materials]")
@@ -71,7 +70,7 @@ TEST_CASE("Lighting with eye in the path of the reflection vector", "[materials]
   Tuple normalv = Vector(0, 0, -1);
   Light light(Point(0, 10, -10), Color(1, 1, 1));
   Color result = Lighting(m, light, position, eyev, normalv);
-  CHECK(result == Color(1.6364, 1.6364, 1.6364));
+  CHECK(ApproximatelyEqual(result, Color(1.6364, 1.6364, 1.6364)));
 }
 
 TEST_CASE("Lighting with the light behind the surface", "[materials]")

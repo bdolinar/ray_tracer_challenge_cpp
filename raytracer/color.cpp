@@ -1,4 +1,4 @@
-#include "color.h"
+#include <raytracer/color.h>
 
 #include <algorithm>
 #include <math.h>
@@ -27,4 +27,13 @@ bool Color::operator==(const Color& rhs) const
 Color color(double red, double green, double blue)
 {
   return Color(red, green, blue);
+}
+
+
+bool ApproximatelyEqual(const Color &a, const Color &b)
+{
+  bool equalRed = EqualToDigits(a.Red(), b.Red(), 4);
+  bool equalGreen = EqualToDigits(a.Green(), b.Green(), 4);
+  bool equalBlue = EqualToDigits(a.Blue(), b.Blue(), 4);
+  return equalRed && equalGreen && equalBlue;
 }

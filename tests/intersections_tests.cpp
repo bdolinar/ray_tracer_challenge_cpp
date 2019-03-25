@@ -1,9 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include "intersection.h"
-#include "ray.h"
-#include "sphere.h"
-#include "tuple.h"
+#include <raytracer/intersection.h>
 
 TEST_CASE("An intersection encapsulates t and object", "[intersections]")
 {

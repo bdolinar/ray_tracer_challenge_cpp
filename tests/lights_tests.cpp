@@ -1,8 +1,7 @@
 #include <catch2/catch.hpp>
 
-#include "color.h"
-#include "light.h"
-#include "tuple.h"
+#include <raytracer/color.h>
+#include <raytracer/light.h>
 
 TEST_CASE("A point light has a position and intensity", "[lights]")
 {

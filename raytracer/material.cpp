@@ -1,9 +1,8 @@
-#include "material.h"
+#include <raytracer/material.h>
 
 #include <math.h>
 
-#include "light.h"
-#include "tuple.h"
+#include <raytracer/light.h>
 
 Material::Material()
 : color_{1, 1, 1}

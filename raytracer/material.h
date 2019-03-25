@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "color.h"
+#include <raytracer/color.h>
 
 class Light;
 class Tuple;

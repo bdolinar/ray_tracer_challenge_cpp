@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 
-#include "canvas.h"
-#include "tuple.h"
+#include <raytracer/canvas.h>
+#include <raytracer/tuple.h>
 
 namespace {
 
