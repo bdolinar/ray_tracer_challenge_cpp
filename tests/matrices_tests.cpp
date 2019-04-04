@@ -339,5 +339,5 @@ TEST_CASE("Multiplying a product by its inverse", "[matrices]")
     {7, 0, 5, 4},
     {6, -2, 0, 5}
   };
-  CHECK(A * B * B.Inverse() == A);
+  CHECK((A * B * B.Inverse()).NearlyEqual(A));
 }

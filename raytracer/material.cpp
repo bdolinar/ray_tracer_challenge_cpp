@@ -1,6 +1,6 @@
 #include <raytracer/material.h>
 
-#include <math.h>
+#include <cmath>
 
 #include <raytracer/light.h>
 
@@ -98,26 +98,26 @@ void Material::Shininess(double shininess)
 Color Lighting(const Material& material,
                const Light& light,
                const Tuple& position,
-               const Tuple& eyev,
-               const Tuple& normalv)
+               const Tuple& toEye,
+               const Tuple& normal)
 {
   // combine the surface color with the light's color/intensity
-  Color effective_color = material.Color() * light.Intensity();
+  Color effectiveColor = material.Color() * light.Intensity();
 
   // find the direction to the light source
   Tuple lightv = (light.Position() - position).Normalize();
 
   // compute the ambient contribution
-  Color ambient = effective_color * material.Ambient();
+  Color ambient = effectiveColor * material.Ambient();
 
-  // light_dot_normal represents the cosine of the angle between the
+  // lightDotNormal represents the cosine of the angle between the
   // light vector and the normal vector. A negative number means the
   // light is on the other side of the surface.
-  double light_dot_normal = Dot(lightv, normalv);
+  double lightDotNormal = Dot(lightv, normal);
   Color diffuse;
   Color specular;
   Color black(0, 0, 0);
-  if (light_dot_normal < 0)
+  if (lightDotNormal < 0)
   {
     diffuse = black;
     specular = black;
@@ -125,13 +125,13 @@ Color Lighting(const Material& material,
   else
   {
     // compute the diffuse contribution
-    diffuse = effective_color * material.Diffuse() * light_dot_normal;
+    diffuse = effectiveColor * material.Diffuse() * lightDotNormal;
 
     // reflect_dot_eye represents the cosine of the angle between the
-    // reflection vector and the eye vector. A negative number means the
-    // light reflects away from the eye.
-    Tuple reflectv = Reflect(-lightv, normalv);
-    double reflect_dot_eye = Dot(reflectv, eyev);
+    // reflection vector and the toEye vector. A negative number means the
+    // light reflects away from the toEye.
+    Tuple reflectv = Reflect(-lightv, normal);
+    double reflect_dot_eye = Dot(reflectv, toEye);
     if (reflect_dot_eye <= 0)
     {
       specular = black;

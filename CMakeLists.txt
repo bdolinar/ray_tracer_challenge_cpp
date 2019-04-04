@@ -17,6 +17,7 @@ set(raytracer_sources
         raytracer/sphere.cpp
         raytracer/transform.cpp
         raytracer/tuple.cpp
+        raytracer/world.cpp
         )
 
 set(raytracer_headers
@@ -30,6 +31,7 @@ set(raytracer_headers
         raytracer/sphere.h
         raytracer/transform.h
         raytracer/tuple.h
+        raytracer/world.h
         )
 
 add_library(raytracer ${raytracer_sources} ${raytracer_headers})
@@ -45,7 +47,8 @@ set(test_sources
         tests/rays_tests.cpp
         tests/spheres_tests.cpp
         tests/transformations_tests.cpp
-        tests/tuples_tests.cpp)
+        tests/tuples_tests.cpp
+        tests/world_tests.cpp)
 
 add_executable(tests ${test_sources})
 target_link_libraries(tests raytracer)

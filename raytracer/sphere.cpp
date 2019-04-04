@@ -1,6 +1,14 @@
 #include <raytracer/sphere.h>
 
+#include <algorithm>
+
 #include <raytracer/intersection.h>
+
+
+std::shared_ptr<Sphere> Sphere::New()
+{
+  return std::shared_ptr<Sphere>(new Sphere);
+}
 
 
 Sphere::Sphere()
@@ -33,7 +41,7 @@ void Sphere::Material(const class Material& m)
 }
 
 
-Intersections Sphere::Intersect(const Ray& ray)
+Intersections Sphere::Intersect(const Ray& ray) const
 {
   // use a ray translated to sphere coordinates to intersect
   Ray raySphere = ray.Transform(Transform().Inverse());

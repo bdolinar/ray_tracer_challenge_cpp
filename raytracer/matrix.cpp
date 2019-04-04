@@ -94,7 +94,7 @@ bool Matrix::operator==(const Matrix& a) const
   {
     for (int col = 0; col < size_; ++col)
     {
-      if (!EqualToDigits(m_[row][col], a[row][col], 10))
+      if (m_[row][col] != a[row][col])
         return false;
     }
   }
@@ -122,7 +122,7 @@ Tuple operator*(const Matrix& a, const Tuple& b)
     }
     r[row] = sum;
   }
-  return Tuple(r[0], r[1], r[2], r[3]);
+  return {r[0], r[1], r[2], r[3]};
 }
 
 
@@ -198,7 +198,7 @@ double Matrix::Minor(int rowRemoved, int colRemoved) const
 double Matrix::Cofactor(int rowRemoved, int colRemoved) const
 {
   double d = Minor(rowRemoved, colRemoved);
-  if ((rowRemoved + colRemoved & 1) == 0)
+  if ((static_cast<unsigned int>(rowRemoved + colRemoved) & 1) == 0)
     return d;
   else
     return -d;
@@ -214,12 +214,11 @@ bool Matrix::IsInvertible() const
 Matrix Matrix::Inverse() const
 {
   Matrix a;
-  const Matrix& m_ = *this;
   for (int row = 0; row < size_; ++row)
   {
     for (int col = 0; col < size_; ++col)
     {
-      double c = m_.Cofactor(row, col);
+      double c = Cofactor(row, col);
       // note that "col, row" here, instead of "row, col",
       // accomplishes the transpose operation!
       a[col][row] = c / Determinant();
@@ -236,6 +235,20 @@ bool Matrix::ApproximatelyEqual(const Matrix& b) const
     for (int col = 0; col < size_; ++col)
     {
       if (!::ApproximatelyEqual(m_[row][col], b[row][col]))
+        return false;
+    }
+  }
+  return true;
+}
+
+
+bool Matrix::NearlyEqual(const Matrix& b) const
+{
+  for (int row = 0; row < size_; ++row)
+  {
+    for (int col = 0; col < size_; ++col)
+    {
+      if (!::NearlyEqual(m_[row][col], b[row][col]))
         return false;
     }
   }

@@ -1,11 +1,13 @@
 #pragma once
 
-#include <math.h>
+#include <cmath>
 #include <vector>
 
 #include <raytracer/material.h>
 #include <raytracer/matrix.h>
 #include <raytracer/tuple.h>
+#include "world.h"
+
 
 class Intersection;
 class Ray;
@@ -13,6 +15,10 @@ class Ray;
 class Sphere
 {
 public:
+  /// \brief Construct a Sphere shared pointer.
+  /// \return The Sphere shared pointer.
+  static std::shared_ptr<Sphere> New();
+
   /// \brief Construct a unit sphere at the origin
   Sphere();
 
@@ -40,7 +46,7 @@ public:
   /// \brief Get the intersections (if any) of the ray and this sphere.
   /// \param[in] ray The ray to intersect with the sphere.
   /// \return The intersections of the ray with this sphere.
-  std::vector<Intersection> Intersect(const Ray& ray);
+  std::vector<Intersection> Intersect(const Ray& ray) const;
 
   /// \brief Get the normal given a point on the surface.
   /// \param[in] worldPoint The world space point on the sphere surface

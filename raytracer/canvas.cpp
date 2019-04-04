@@ -6,7 +6,7 @@ namespace
 {
 int ScaleFraction(double val, int upperValue)
 {
-  int result = val * (upperValue + 1);
+  int result = static_cast<int>(val * (upperValue + 1));
   if (result > upperValue)
     result = upperValue;
   else if (result < 0)

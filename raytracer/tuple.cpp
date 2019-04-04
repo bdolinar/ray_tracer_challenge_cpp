@@ -1,17 +1,7 @@
 #include <raytracer/tuple.h>
 
 #include <algorithm>
-#include <math.h>
-
-
-bool Tuple::operator==(const Tuple& rhs) const
-{
-  bool equalX = EqualToDigits(x, rhs.x, 10);
-  bool equalY = EqualToDigits(y, rhs.y, 10);
-  bool equalZ = EqualToDigits(z, rhs.z, 10);
-  bool equalW = EqualToDigits(w, rhs.w, 10);
-  return equalX && equalY && equalZ && equalW;
-}
+#include <cmath>
 
 
 bool Tuple::IsPoint() const
@@ -35,7 +25,19 @@ double Tuple::Magnitude() const
 Tuple Tuple::Normalize() const
 {
   double mag = Magnitude();
-  return Tuple(x / mag, y / mag, z / mag, w / mag);
+  return {x / mag, y / mag, z / mag, w / mag};
+}
+
+
+bool Tuple::operator==(const Tuple& rhs) const
+{
+  return std::tie(x, y, z, w) == std::tie(rhs.x, rhs.y, rhs.z, rhs.w);
+}
+
+
+bool Tuple::operator!=(const Tuple& rhs) const
+{
+  return !(rhs == *this);
 }
 
 
@@ -68,9 +70,26 @@ bool ApproximatelyEqual(const Tuple& a, const Tuple& b)
 }
 
 
+bool NearlyEqual(const Tuple& a, const Tuple& b)
+{
+  bool equalX = EqualToDigits(a.x, b.x, 10);
+  bool equalY = EqualToDigits(a.y, b.y, 10);
+  bool equalZ = EqualToDigits(a.z, b.z, 10);
+  bool equalW = EqualToDigits(a.w, b.w, 10);
+  return equalX && equalY && equalZ && equalW;
+}
+
+
 bool ApproximatelyEqual(double a, double b)
 {
   bool equal = EqualToDigits(a, b, 3);
+  return equal;
+}
+
+
+bool NearlyEqual(double a, double b)
+{
+  bool equal = EqualToDigits(a, b, 10);
   return equal;
 }
 

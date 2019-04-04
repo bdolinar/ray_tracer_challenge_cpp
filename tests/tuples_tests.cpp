@@ -1,4 +1,4 @@
-#include <math.h>
+#include <cmath>
 
 #include <catch2/catch.hpp>
 
@@ -182,7 +182,7 @@ TEST_CASE("Subtracting colors", "[tuples]")
 {
   Color c1(0.9, 0.6, 0.75);
   Color c2(0.7, 0.1, 0.25);
-  CHECK(c1 - c2 == Color(0.2, 0.5, 0.5));
+  CHECK(NearlyEqual(c1 - c2, Color(0.2, 0.5, 0.5)));
 }
 
 TEST_CASE("Multiplying a color by a scalar", "[tuples]")
@@ -195,7 +195,7 @@ TEST_CASE("Multiplying colors", "[tuples]")
 {
   Color c1(1, 0.2, 0.4);
   Color c2(0.9, 1, 0.1);
-  CHECK(c1 * c2 == Color(0.9, 0.2, 0.04));
+  CHECK(NearlyEqual(c1 * c2, Color(0.9, 0.2, 0.04)));
 }
 
 TEST_CASE("Reflecting a vector approaching at 45°", "[tuples]")
@@ -211,5 +211,5 @@ TEST_CASE("Reflecting a vector off a slanted surface", "[tuples]")
   Tuple v = Vector(0, -1, 0);
   Tuple n = Vector(sqrt(2)/2, sqrt(2)/2, 0);
   Tuple r = Reflect(v, n);
-  CHECK(r == Vector(1, 0, 0));
+  CHECK(NearlyEqual(r, Vector(1, 0, 0)));
 }

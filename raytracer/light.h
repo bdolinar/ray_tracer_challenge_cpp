@@ -1,12 +1,20 @@
 
 #pragma once
 
+#include <memory>
+
 #include <raytracer/color.h>
 #include <raytracer/tuple.h>
 
 class Light
 {
 public:
+  /// \brief Construct a Light as a shared pointer.
+  /// \param position The position of the light in world space.
+  /// \param intensity The brightness and color of the light.
+  /// \return The Light shared pointer.
+  static std::shared_ptr<Light> New(const Tuple& position, const Color& intensity);
+
   /// \brief Construct a light.
   /// \param[in] position The position of the light in world space.
   /// \param[in] intensity The brightness and color of the light.

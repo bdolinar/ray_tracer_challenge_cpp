@@ -25,8 +25,14 @@ struct Tuple
   }
 
   /// \brief Equals operator.
-  /// \param[in] rhs The tuple to compare against.
+  /// \param rhs The Tuple to check for equality.
+  /// \return True if the Tuples are equal.
   bool operator==(const Tuple& rhs) const;
+
+  /// \brief Not equal operator.
+  /// \param rhs The Tuple to check for equality.
+  /// \return True if the Tuples are not equal.
+  bool operator!=(const Tuple& rhs) const;
 
   /// \brief Determine if tuple is a point.
   /// \return True if tuple is a point (w == 1.0).
@@ -56,7 +62,7 @@ struct Tuple
 /// \return The result of adding the two tuples.
 inline Tuple operator+(const Tuple& a, const Tuple& b)
 {
-  return Tuple(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+  return {a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w};
 }
 
 /// \brief Subtracts one tuple from another.
@@ -65,7 +71,7 @@ inline Tuple operator+(const Tuple& a, const Tuple& b)
 /// \return The result of subtracting the two tuples.
 inline Tuple operator-(const Tuple& a, const Tuple& b)
 {
-  return Tuple(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+  return {a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w};
 }
 
 /// \brief Multiplies a tuple by a scalar.
@@ -74,7 +80,7 @@ inline Tuple operator-(const Tuple& a, const Tuple& b)
 /// \return The result of multiplying a tuple by a scalar.
 inline Tuple operator*(const Tuple& a, double b)
 {
-  return Tuple(a.x * b, a.y * b, a.z * b, a.w * b);
+  return {a.x * b, a.y * b, a.z * b, a.w * b};
 }
 
 /// \brief Divides a tuple by a scalar.
@@ -83,7 +89,7 @@ inline Tuple operator*(const Tuple& a, double b)
 /// \return The result of multiplying a tuple by a scalar.
 inline Tuple operator/(const Tuple& a, double b)
 {
-  return Tuple(a.x / b, a.y / b, a.z / b, a.w / b);
+  return {a.x / b, a.y / b, a.z / b, a.w / b};
 }
 
 /// \brief Negates a tuple.
@@ -91,7 +97,7 @@ inline Tuple operator/(const Tuple& a, double b)
 /// \return The negated tuple.
 inline Tuple operator-(const Tuple& a)
 {
-  return Tuple(-a.x, -a.y, -a.z, -a.w);
+  return {-a.x, -a.y, -a.z, -a.w};
 }
 
 /// \brief Construct a point tuple.
@@ -132,15 +138,25 @@ Tuple Cross(const Tuple& a, const Tuple& b);
 /// \return The reflection vector.
 Tuple Reflect(const Tuple& inVector, const Tuple& normal);
 
-/// \brief Determine if two tuples are approximately equal.
+/// \brief Determine if two tuples are approximately equal (within 4 digits).
 /// \param[in] a The first tuple.
 /// \param[in] b The second tuple.
 bool ApproximatelyEqual(const Tuple& a, const Tuple& b);
+
+/// \brief Determine if two tuples are nearly equal (within 10 digits).
+/// \param[in] a The first tuple.
+/// \param[in] b The second tuple.
+bool NearlyEqual(const Tuple& a, const Tuple& b);
 
 /// \brief Determine if two doubles are approximately equal.
 /// \param[in] a The first double.
 /// \param[in] b The second double.
 bool ApproximatelyEqual(double a, double b);
+
+/// \brief Determine if two doubles are nearly equal.
+/// \param[in] a The first double.
+/// \param[in] b The second double.
+bool NearlyEqual(double a, double b);
 
 /// \brief Determine if two doubles are equal within a given number of digits.
 /// \param[in] a The first double.

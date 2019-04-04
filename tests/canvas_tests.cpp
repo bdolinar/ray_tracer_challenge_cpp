@@ -15,7 +15,7 @@ std::string ExtractLines(const std::string& lines, int first_line, int last_line
   {
     size_t line_end = lines.find("\r\n", start);
     if (line_end == std::string::npos)
-      line_end = lines.find("\n", start);
+      line_end = lines.find('\n', start);
     if (line_end == std::string::npos)
       line_end = length;
     if (line_number >= first_line && line_number <= last_line)
