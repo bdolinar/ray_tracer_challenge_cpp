@@ -10,20 +10,20 @@ TEST_CASE("An intersection encapsulates t and object", "[intersections]")
   CHECK(&i.Object() == &s);
 }
 
-#if 0
 TEST_CASE("Precomputing the state of an intersection", "[intersections]")
 {
   Ray r(Point(0, 0, -5), Vector(0, 0, 1));
   Sphere shape;
   Intersection i(4, shape);
-  auto comps = prepare_computations(i, r);
-  CHECK(comps.t == i.t);
-  CHECK(comps.object == i.object);
+  Computations comps = i.PrepareComputations(r);
+  CHECK(comps.t == i.T());
+  CHECK(comps.object == &i.Object());
   CHECK(comps.point == Point(0, 0, -1));
-  CHECK(comps.eyev == Vector(0, 0, -1));
-  CHECK(comps.normalv == Vector(0, 0, -1));
+  CHECK(comps.toEye == Vector(0, 0, -1));
+  CHECK(comps.normal == Vector(0, 0, -1));
 }
 
+#if 0
 TEST_CASE("Precomputing the reflection vector", "[intersections]")
 {
   auto shape = plane();
