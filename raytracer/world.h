@@ -12,6 +12,7 @@ class Light;
 class Ray;
 class Sphere;
 
+/// World for a raytraced scene.
 class World
 {
 public:

@@ -1,7 +1,7 @@
-.ruby-gemset
-.ruby-version
 .DS_Store
+
 .idea/
-xcuserdata/
 cmake-build-debug/
-RayTracer.xcodeproj/
+
+doxywarnings.txt
+Doxygen/

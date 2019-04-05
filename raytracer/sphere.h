@@ -12,6 +12,7 @@
 class Intersection;
 class Ray;
 
+/// A sphere object.
 class Sphere
 {
 public:
@@ -27,7 +28,7 @@ public:
   Matrix Transform() const;
 
   /// \brief Set the transformation matrix of the sphere.
-  /// \param[in] t The new transformation matrix of the sphere.
+  /// \param t The new transformation matrix of the sphere.
   void Transform(const Matrix& t);
 
   /// \brief Get the material of the sphere.
@@ -35,21 +36,21 @@ public:
   Material Material() const;
 
   /// \brief Set the material of the sphere.
-  /// \param[in] m The new material of the sphere.
+  /// \param m The new material of the sphere.
   void Material(const class Material& m);
 
   /// \brief Determine if two spheres are the same object.
-  /// \param[in] rhs The sphere to compare against.
+  /// \param rhs The sphere to compare against.
   /// \return True if the two spheres are the same object.
   bool operator==(const Sphere& rhs) const { return this == &rhs; }
 
   /// \brief Get the intersections (if any) of the ray and this sphere.
-  /// \param[in] ray The ray to intersect with the sphere.
+  /// \param ray The ray to intersect with the sphere.
   /// \return The intersections of the ray with this sphere.
   std::vector<Intersection> Intersect(const Ray& ray) const;
 
   /// \brief Get the normal given a point on the surface.
-  /// \param[in] worldPoint The world space point on the sphere surface
+  /// \param worldPoint The world space point on the sphere surface
   /// \return The normal vector at the surface of the sphere.
   Tuple NormalAt(Tuple worldPoint) const;
 

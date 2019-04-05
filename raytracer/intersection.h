@@ -8,13 +8,14 @@
 class Computations;
 class Sphere;
 
+/// Data for an object and ray intersection.
 class Intersection
 {
 public:
 
   /// \brief Construct an intersection.
-  /// \param[in] t The distance to the intersection.
-  /// \param[in] object The object at the intersection.
+  /// \param t The distance to the intersection.
+  /// \param object The object at the intersection.
   Intersection(double t, const Sphere& object)
   : t_(t)
   , object_(&object)
@@ -30,7 +31,7 @@ public:
   const Sphere& Object() const { return *object_; }
 
   /// \brief Determine if two intersections are equal.
-  /// \param[in] rhs The intersection to compare against.
+  /// \param rhs The intersection to compare against.
   /// \return True if the intersections are equal.
   bool operator==(const Intersection& rhs) const { return t_ == rhs.t_ && object_ == rhs.object_; }
 
@@ -58,6 +59,6 @@ struct Computations
 };
 
 /// \brief find the first intersection in the positive direction.
-/// \param[in] intersections A vector of intersections.
+/// \param intersections A vector of intersections.
 /// \return The first intersection found at a positive distance.
 const Intersection* Hit(const Intersections& intersections);

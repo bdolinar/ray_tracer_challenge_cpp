@@ -6,6 +6,7 @@
 #include <raytracer/color.h>
 #include <raytracer/tuple.h>
 
+/// A point light source.
 class Light
 {
 public:
@@ -16,8 +17,8 @@ public:
   static std::shared_ptr<Light> New(const Tuple& position, const Color& intensity);
 
   /// \brief Construct a light.
-  /// \param[in] position The position of the light in world space.
-  /// \param[in] intensity The brightness and color of the light.
+  /// \param position The position of the light in world space.
+  /// \param intensity The brightness and color of the light.
   Light(const Tuple& position, const Color& intensity);
 
   /// \brief Get the world space position of the light.

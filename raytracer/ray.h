@@ -5,12 +5,13 @@
 
 class Matrix;
 
+/// A light ray.
 class Ray
 {
 public:
   /// \brief Construct a ray.
-  /// \param[in] origin The point the ray begins at.
-  /// \param[in] direction The direction of the ray.
+  /// \param origin The point the ray begins at.
+  /// \param direction The direction of the ray.
   Ray(const Tuple& origin, const Tuple& direction)
   : origin_(origin)
   , direction_(direction)
@@ -26,12 +27,12 @@ public:
   const Tuple& Direction() const { return direction_; }
 
   /// \brief Get a point a distance t from the ray origin.
-  /// \param[in] t The distance from the ray origin.
+  /// \param t The distance from the ray origin.
   /// \return The point at distance t from the ray origin.
   Tuple Position(double t) const;
 
   /// \brief Transform the ray by the given transformation matrix.
-  /// \param[in] m The transformation matrix.
+  /// \param m The transformation matrix.
   /// \return The transformed ray.
   Ray Transform(const Matrix& m) const;
 
