@@ -12,6 +12,12 @@ int World::ObjectCount() const
 }
 
 
+Sphere& World::Object(int objectIndex)
+{
+  return *objects_.at(objectIndex);
+}
+
+
 void World::AddObject(std::shared_ptr<Sphere> object)
 {
   objects_.push_back(object);
@@ -40,10 +46,31 @@ std::vector<Intersection> World::Intersect(const Ray& ray) const
 }
 
 
-World& DefaultWorld()
+Color World::ShadeHit(const Computations& computations) const
 {
-  static World world;
+  return Lighting(computations.object->Material(), *light_,
+    computations.point, computations.toEye, computations.normal);
+}
 
+
+Color World::ColorAt(const Ray& ray) const
+{
+  std::vector<Intersection> intersections = Intersect(ray);
+  const Intersection* intersection = Hit(intersections);
+  Color color;
+  if (intersection)
+  {
+    Computations computations = intersection->PrepareComputations(ray);
+    color = ShadeHit(computations);
+  }
+
+  return color;
+}
+
+
+World DefaultWorld()
+{
+  World world;
   auto light = Light::New(Point(-10, 10, -10), Color(1, 1, 1));
   world.AddLight(light);
 

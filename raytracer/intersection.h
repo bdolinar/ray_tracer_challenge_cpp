@@ -5,21 +5,13 @@
 #include <raytracer/ray.h>
 #include <raytracer/sphere.h>
 
+class Computations;
 class Sphere;
-
-/// \brief Store computations for ray intersection.
-struct Computations
-{
-  double t;             ///< T value along ray.
-  const Sphere* object; ///< Intersected object.
-  Tuple point;          ///< Point of intersection.
-  Tuple toEye;          ///< Vector directed to eye.
-  Tuple normal;         ///< Normal vector on object surface.
-};
 
 class Intersection
 {
 public:
+
   /// \brief Construct an intersection.
   /// \param[in] t The distance to the intersection.
   /// \param[in] object The object at the intersection.
@@ -53,6 +45,17 @@ private:
 };
 
 typedef std::vector<Intersection> Intersections;
+
+/// \brief Store computations for ray intersection.
+struct Computations
+{
+  double t = 0.0;                 ///< T value along ray.
+  const Sphere* object = nullptr; ///< Intersected object.
+  Tuple point;                    ///< Point of intersection.
+  Tuple toEye;                    ///< Vector directed to eye.
+  Tuple normal;                   ///< Normal vector on object surface.
+  bool inside = false;            ///< Did the ray come from inside the object?
+};
 
 /// \brief find the first intersection in the positive direction.
 /// \param[in] intersections A vector of intersections.

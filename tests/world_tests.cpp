@@ -21,60 +21,62 @@ TEST_CASE("Intersect a world with a ray", "[world]")
   CHECK(xs[3].T() == 6);
 }
 
-#if 0
 TEST_CASE("Shading an intersection", "[world]")
 {
-  auto w = default_world();
-  auto r = ray(point(0, 0, -5), vector(0, 0, 1));
-  auto shape = the first object in w;
-  auto i = intersection(4, shape);
-  auto comps = prepare_computations(i, r);
-  auto c = shade_hit(w, comps);
-  CHECK(c == color(0.38066, 0.47583, 0.2855));
+  World w = DefaultWorld();
+  Ray r(Point(0, 0, -5), Vector(0, 0, 1));
+  const Sphere& shape = w.Object(0);
+  Intersection i(4, shape);
+  Computations comps = i.PrepareComputations(r);
+  Color c = w.ShadeHit(comps);
+  CHECK(ApproximatelyEqual(c, Color(0.38066, 0.47583, 0.2855)));
 }
-#endif
 
-#if 0
 TEST_CASE("Shading an intersection from the inside", "[world]")
 {
-  auto w = default_world();
-  auto w.light = point_light(point(0, 0.25, 0), color(1, 1, 1));
-  auto r = ray(point(0, 0, 0), vector(0, 0, 1));
-  auto shape = the second object in w;
-  auto i = intersection(0.5, shape);
-  auto comps = prepare_computations(i, r);
-  auto c = shade_hit(w, comps);
-  CHECK(c == color(0.90498, 0.90498, 0.90498));
+  World w = DefaultWorld();
+  w.AddLight(Light::New(Point(0, 0.25, 0), Color(1, 1, 1)));
+  Ray r(Point(0, 0, 0), Vector(0, 0, 1));
+  const Sphere& shape = w.Object(1);
+  Intersection i(0.5, shape);
+  Computations comps = i.PrepareComputations(r);
+  Color c = w.ShadeHit(comps);
+  CHECK(ApproximatelyEqual(c, Color(0.90498, 0.90498, 0.90498)));
 }
 
 TEST_CASE("The color when a ray misses", "[world]")
 {
-  auto w = default_world();
-  auto r = ray(point(0, 0, -5), vector(0, 1, 0));
-  auto c = color_at(w, r);
-  CHECK(c == color(0, 0, 0));
+  World w = DefaultWorld();
+  Ray r(Point(0, 0, -5), Vector(0, 1, 0));
+  Color c = w.ColorAt(r);
+  CHECK(c == Color(0, 0, 0));
 }
 
 TEST_CASE("The color when a ray hits", "[world]")
 {
-  auto w = default_world();
-  auto r = ray(point(0, 0, -5), vector(0, 0, 1));
-  auto c = color_at(w, r);
-  CHECK(c == color(0.38066, 0.47583, 0.2855));
+  World w = DefaultWorld();
+  Ray r(Point(0, 0, -5), Vector(0, 0, 1));
+  Color c = w.ColorAt(r);
+  CHECK(ApproximatelyEqual(c, Color(0.38066, 0.47583, 0.2855)));
 }
 
 TEST_CASE("The color with an intersection behind the ray", "[world]")
 {
-  auto w = default_world();
-  auto outer = the first object in w;
-  auto outer.material.ambient = 1;
-  auto inner = the second object in w;
-  auto inner.material.ambient = 1;
-  auto r = ray(point(0, 0, 0.75), vector(0, 0, -1));
-  auto c = color_at(w, r);
-  CHECK(c == inner.material.color);
+  World w = DefaultWorld();
+  Sphere& outer = w.Object(0);
+  Material outerMaterial = outer.Material();
+  outerMaterial.Ambient(1);
+  outer.Material(outerMaterial);
+  Sphere& inner = w.Object(1);
+  Material innerMaterial = inner.Material();
+  innerMaterial.Ambient(1);
+  inner.Material(innerMaterial);
+  Ray r(Point(0, 0, 0.75), Vector(0, 0, -1));
+  Color c = w.ColorAt(r);
+  CHECK(c == innerMaterial.Color());
 }
 
+#if 0
 TEST_CASE("There is no shadow when nothing is collinear with point and light", "[world]")
 {
   auto w = default_world();
