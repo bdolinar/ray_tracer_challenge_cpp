@@ -28,5 +28,15 @@ Computations Intersection::PrepareComputations(const Ray& ray) const
   Tuple point = ray.Position(t);
   Tuple toEye = -ray.Direction();
   Tuple normal = object->NormalAt(point);
-  return {t, object, point, toEye, normal};
+  bool inside = false;
+  if (Dot(normal, toEye) < 0)
+  {
+    inside = true;
+    normal = - normal;
+  }
+  else
+  {
+    inside = false;
+  }
+  return {t, object, point, toEye, normal, inside};
 }

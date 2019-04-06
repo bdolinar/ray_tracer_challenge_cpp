@@ -15,7 +15,7 @@ TEST_CASE("Precomputing the state of an intersection", "[intersections]")
   Ray r(Point(0, 0, -5), Vector(0, 0, 1));
   Sphere shape;
   Intersection i(4, shape);
-  Computations comps = i.PrepareComputations(r);
+  auto comps = i.PrepareComputations(r);
   CHECK(comps.t == i.T());
   CHECK(comps.object == &i.Object());
   CHECK(comps.point == Point(0, 0, -1));
@@ -32,14 +32,15 @@ TEST_CASE("Precomputing the reflection vector", "[intersections]")
   auto comps = prepare_computations(i, r);
   CHECK(comps.reflectv == Vector(0, sqrt(2)/2, sqrt(2)/2));
 }
+#endif
 
 TEST_CASE("The hit, when an intersection occurs on the outside", "[intersections]")
 {
   Ray r(Point(0, 0, -5), Vector(0, 0, 1));
   Sphere shape;
   Intersection i(4, shape);
-  auto comps = prepare_computations(i, r);
-  CHECK(comps.inside == false);
+  auto comps = i.PrepareComputations(r);
+  CHECK_FALSE(comps.inside);
 }
 
 TEST_CASE("The hit, when an intersection occurs on the inside", "[intersections]")
@@ -47,13 +48,14 @@ TEST_CASE("The hit, when an intersection occurs on the inside", "[intersections]
   Ray r(Point(0, 0, 0), Vector(0, 0, 1));
   Sphere shape;
   Intersection i(1, shape);
-  auto comps = prepare_computations(i, r);
+  auto comps = i.PrepareComputations(r);
   CHECK(comps.point == Point(0, 0, 1));
-  CHECK(comps.eyev == Vector(0, 0, -1));
-  CHECK(comps.inside == true);
-  CHECK(comps.normalv == Vector(0, 0, -1));
+  CHECK(comps.toEye == Vector(0, 0, -1));
+  CHECK(comps.normal == Vector(0, 0, -1));
+  CHECK(comps.inside);
 }
 
+#if 0
 TEST_CASE("The hit should offset the point", "[intersections]")
 {
   Ray r(Point(0, 0, -5), Vector(0, 0, 1));
