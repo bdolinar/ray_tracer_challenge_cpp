@@ -1,11 +1,7 @@
-#include <raytracer/tuple.h>
+#include "tuple.h"
 
 #include <algorithm>
 #include <math.h>
-
-namespace
-{
-} // namespace
 
 bool Tuple::operator==(const Tuple& rhs) const
 {
@@ -60,7 +56,7 @@ Tuple Cross(const Tuple& a, const Tuple& b)
   return Vector(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
 }
 
-bool AproximatelyEqual(const Tuple& a, const Tuple& b)
+bool ApproximatelyEqual(const Tuple& a, const Tuple& b)
 {
   bool equalX = EqualToDigits(a.x, b.x, 4);
   bool equalY = EqualToDigits(a.y, b.y, 4);
@@ -69,7 +65,7 @@ bool AproximatelyEqual(const Tuple& a, const Tuple& b)
   return equalX && equalY && equalZ && equalW;
 }
 
-bool AproximatelyEqual(double a, double b)
+bool ApproximatelyEqual(double a, double b)
 {
   bool equal = EqualToDigits(a, b, 3);
   return equal;

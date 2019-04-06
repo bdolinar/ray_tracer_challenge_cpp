@@ -121,12 +121,12 @@ Tuple Cross(const Tuple& a, const Tuple& b);
 /// \brief Determine if two tuples are approximately equal.
 /// \param[in] a The first tuple.
 /// \param[in] b The second tuple.
-bool AproximatelyEqual(const Tuple& a, const Tuple& b);
+bool ApproximatelyEqual(const Tuple& a, const Tuple& b);
 
 /// \brief Determine if two doubles are approximately equal.
 /// \param[in] a The first double.
 /// \param[in] b The second double.
-bool AproximatelyEqual(double a, double b);
+bool ApproximatelyEqual(double a, double b);
 
 /// \brief Determine if two doubles are equal within a given number of digits.
 /// \param[in] a The first double.
