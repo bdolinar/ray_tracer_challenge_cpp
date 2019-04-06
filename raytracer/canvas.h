@@ -1,6 +1,6 @@
 #pragma once
 
-#include "color.h"
+#include <raytracer/color.h>
 
 #include <fstream>
 #include <vector>

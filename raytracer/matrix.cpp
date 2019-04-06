@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include <raytracer/matrix.h>
 
 
 MatrixRow::MatrixRow()

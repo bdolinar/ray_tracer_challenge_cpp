@@ -3,9 +3,9 @@
 #include <math.h>
 #include <vector>
 
-#include "material.h"
-#include "matrix.h"
-#include "tuple.h"
+#include <raytracer/material.h>
+#include <raytracer/matrix.h>
+#include <raytracer/tuple.h>
 
 class Intersection;
 class Ray;

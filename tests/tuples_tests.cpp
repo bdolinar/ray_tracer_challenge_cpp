@@ -2,8 +2,8 @@
 
 #include <catch2/catch.hpp>
 
-#include "color.h"
-#include "tuple.h"
+#include <raytracer/color.h>
+#include <raytracer/tuple.h>
 
 
 TEST_CASE("A tuple with w=1.0 is a point", "[tuples]")

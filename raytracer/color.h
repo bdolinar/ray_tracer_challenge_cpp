@@ -81,3 +81,8 @@ inline Color operator/(const Color& a, double b)
 {
   return Color(a.Red() / b, a.Green() / b, a.Blue() / b);
 }
+
+/// \brief Determine if two colors are approximately equal.
+/// \param[in] a The first color.
+/// \param[in] b The second color.
+bool ApproximatelyEqual(const Color &a, const Color &b);

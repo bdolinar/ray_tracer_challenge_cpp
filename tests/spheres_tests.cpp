@@ -1,12 +1,7 @@
 #include <catch2/catch.hpp>
 
-#include "intersection.h"
-#include "material.h"
-#include "matrix.h"
-#include "ray.h"
-#include "sphere.h"
-#include "transform.h"
-#include "tuple.h"
+#include <raytracer/intersection.h>
+#include <raytracer/transform.h>
 
 TEST_CASE("A ray intersects a sphere at two points", "[spheres]")
 {

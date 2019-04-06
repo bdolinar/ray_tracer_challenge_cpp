@@ -1,9 +1,8 @@
 #include <catch2/catch.hpp>
 
-#include "matrix.h"
-#include "ray.h"
-#include "transform.h"
-#include "tuple.h"
+#include <raytracer/matrix.h>
+#include <raytracer/ray.h>
+#include <raytracer/transform.h>
 
 TEST_CASE("Creating and querying a ray", "[rays]")
 {

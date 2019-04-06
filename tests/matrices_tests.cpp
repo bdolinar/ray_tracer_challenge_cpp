@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include "matrix.h"
+#include <raytracer/matrix.h>
 
 TEST_CASE("Constructing and inspecting a 4x4 matrix", "[matrices]")
 {

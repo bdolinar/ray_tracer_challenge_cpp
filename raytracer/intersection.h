@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include "ray.h"
-#include "sphere.h"
+#include <raytracer/ray.h>
+#include <raytracer/sphere.h>
 
 class Sphere;
 

@@ -1,7 +1,6 @@
-#include "ray.h"
+#include <raytracer/ray.h>
 
-#include "matrix.h"
-#include "tuple.h"
+#include <raytracer/matrix.h>
 
 
 Tuple Ray::Position(double t) const

@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "tuple.h"
+#include <raytracer/tuple.h>
 
 class Matrix;
 

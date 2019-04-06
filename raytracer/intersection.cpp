@@ -1,4 +1,4 @@
-#include "intersection.h"
+#include <raytracer/intersection.h>
 
 
 const Intersection* Hit(const Intersections& intersections)
