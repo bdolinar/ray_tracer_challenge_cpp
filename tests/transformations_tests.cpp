@@ -59,8 +59,8 @@ TEST_CASE("Rotating a point around the x axis", "[transformations]")
   Tuple p = Point(0, 1, 0);
   Matrix half_quarter = RotationX(M_PI / 4);
   Matrix full_quarter = RotationX(M_PI / 2);
-  CHECK(half_quarter * p == Point(0, sqrt(2)/2, sqrt(2)/2));
-  CHECK(full_quarter * p == Point(0, 0, 1));
+  CHECK(NearlyEqual(half_quarter * p, Point(0, sqrt(2)/2, sqrt(2)/2)));
+  CHECK(NearlyEqual(full_quarter * p, Point(0, 0, 1)));
 }
 
 TEST_CASE("The inverse of an x-rotation rotates in the opposite direction", "[transformations]")
@@ -68,7 +68,7 @@ TEST_CASE("The inverse of an x-rotation rotates in the opposite direction", "[tr
   Tuple p = Point(0, 1, 0);
   Matrix half_quarter = RotationX(M_PI / 4);
   Matrix inv = half_quarter.Inverse();
-  CHECK(inv * p == Point(0, sqrt(2)/2, -sqrt(2)/2));
+  CHECK(NearlyEqual(inv * p, Point(0, sqrt(2)/2, -sqrt(2)/2)));
 }
 
 TEST_CASE("Rotating a point around the y axis", "[transformations]")
@@ -76,8 +76,8 @@ TEST_CASE("Rotating a point around the y axis", "[transformations]")
   Tuple p = Point(0, 0, 1);
   Matrix half_quarter = RotationY(M_PI / 4);
   Matrix full_quarter = RotationY(M_PI / 2);
-  CHECK(half_quarter * p == Point(sqrt(2)/2, 0, sqrt(2)/2));
-  CHECK(full_quarter * p == Point(1, 0, 0));
+  CHECK(NearlyEqual(half_quarter * p, Point(sqrt(2)/2, 0, sqrt(2)/2)));
+  CHECK(NearlyEqual(full_quarter * p, Point(1, 0, 0)));
 }
 
 TEST_CASE("Rotating a point around the z axis", "[transformations]")
@@ -85,8 +85,8 @@ TEST_CASE("Rotating a point around the z axis", "[transformations]")
   Tuple p = Point(0, 1, 0);
   Matrix half_quarter = RotationZ(M_PI / 4);
   Matrix full_quarter = RotationZ(M_PI / 2);
-  CHECK(half_quarter * p == Point(-sqrt(2)/2, sqrt(2)/2, 0));
-  CHECK(full_quarter * p == Point(-1, 0, 0));
+  CHECK(NearlyEqual(half_quarter * p, Point(-sqrt(2)/2, sqrt(2)/2, 0)));
+  CHECK(NearlyEqual(full_quarter * p, Point(-1, 0, 0)));
 }
 
 TEST_CASE("A shearing transformation moves x in proportion to y", "[transformations]")
@@ -138,9 +138,9 @@ TEST_CASE("Individual transformations are applied in sequence", "[transformation
   Matrix B = Scaling(5, 5, 5);
   Matrix C = Translation(10, 5, 7);
   Tuple p2 = A * p;
-  CHECK(p2 == Point(1, -1, 0));
+  CHECK(NearlyEqual(p2, Point(1, -1, 0)));
   Tuple p3 = B * p2;
-  CHECK(p3 == Point(5, -5, 0));
+  CHECK(NearlyEqual(p3, Point(5, -5, 0)));
   Tuple p4 = C * p3;
   CHECK(p4 == Point(15, 0, 7));
 }

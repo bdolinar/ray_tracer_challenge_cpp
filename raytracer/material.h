@@ -57,11 +57,11 @@ public:
   /// \param[in] specular The specular value.
   void Specular(double specular);
 
-  /// \brief Get the shininess value (size of shiney spot).
+  /// \brief Get the shininess value (size of shiny spot).
   /// \return The shininess value.
   double Shininess() const;
 
-  /// \brief Set the shininess value (size of shiney spot).
+  /// \brief Set the shininess value (size of shiny spot).
   /// \param[in] shininess The shininess value.
   void Shininess(double shininess);
 
@@ -76,5 +76,5 @@ private:
 Color Lighting(const Material& m,
                const Light& light,
                const Tuple& position,
-               const Tuple& eyev,
-               const Tuple& normalv);
+               const Tuple& toEye,
+               const Tuple& normal);

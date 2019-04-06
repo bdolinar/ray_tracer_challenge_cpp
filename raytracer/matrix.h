@@ -117,6 +117,11 @@ public:
   /// \return True if all elements are equal within 4 significant digits.
   bool ApproximatelyEqual(const Matrix& a) const;
 
+  /// \brief Determine if the matrix is nearly equal to given matrix.
+  /// \param[in] a The matrix to compare against.
+  /// \return True if all elements are equal within 10 significant digits.
+  bool NearlyEqual(const Matrix& a) const;
+
 public:
   std::array<MatrixRow, 4> m_; ///< The rows of the matrix.
   size_t size_;                ///< The size of the matrix.

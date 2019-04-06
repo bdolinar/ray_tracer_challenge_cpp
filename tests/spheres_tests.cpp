@@ -28,7 +28,7 @@ TEST_CASE("A ray misses a sphere", "[spheres]")
   Ray r(Point(0, 2, -5), Vector(0, 0, 1));
   Sphere s;
   Intersections xs = s.Intersect(r);
-  CHECK(xs.size() == 0);
+  CHECK(xs.empty());
 }
 
 TEST_CASE("A ray originates inside a sphere", "[spheres]")
@@ -92,7 +92,7 @@ TEST_CASE("Intersecting a translated sphere with a ray", "[spheres]")
   Sphere s;
   s.Transform(Translation(5, 0, 0));
   Intersections xs = s.Intersect(r);
-  CHECK(xs.size() == 0);
+  CHECK(xs.empty());
 }
 
 TEST_CASE("The normal on a sphere at a point on the x axis", "[spheres]")
