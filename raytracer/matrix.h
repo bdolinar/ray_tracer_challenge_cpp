@@ -8,29 +8,29 @@
 class MatrixRow
 {
 public:
-  /// \brief Construct a MatrixRow filled with zeros.
+  /// Construct a MatrixRow filled with zeros.
   MatrixRow();
 
-  /// \brief Construct a MatrixRow with an initializer list.
+  /// Construct a MatrixRow with an initializer list.
   /// \param list The initializer list.
   MatrixRow(const std::initializer_list<double>& list);
 
-  /// \brief Array operator to access row elements.
+  /// Array operator to access row elements.
   /// \param colIndex The element index to access.
   /// \return The element value.
   double& operator[](size_t colIndex);
 
-  /// \brief Array operator to access row elements from a const MatrixRow.
+  /// Array operator to access row elements from a const MatrixRow.
   /// \param colIndex The element index to access.
   /// \return The element value.
   double operator[](size_t colIndex) const;
 
-  /// \brief Equals operator to determine if two MatrixRows are equal.
+  /// Equals operator to determine if two MatrixRows are equal.
   /// \param a The row to compare against.
   /// \return True if all of the row values are approximately equal.
   bool operator==(const MatrixRow& a) const;
 
-  /// \brief Not equal operator to determine if two MatrixRows are not equal.
+  /// Not equal operator to determine if two MatrixRows are not equal.
   /// \param a The row to compare against.
   /// \return True if the row values are not approximately equal.
   bool operator!=(const MatrixRow& a) const;
@@ -43,83 +43,83 @@ protected:
 class Matrix
 {
 public:
-  /// \brief Construct a Matrix of given size filled with zeros.
+  /// Construct a Matrix of given size filled with zeros.
   /// \param size The number of rows and columns in the matrix.
   explicit Matrix(size_t size = 4);
 
-  /// \brief Construct a Matrix with an initializer list.
+  /// Construct a Matrix with an initializer list.
   /// \param list The initializer list.
   Matrix(const std::initializer_list<MatrixRow>& list);
 
-  /// \brief Get the number of rows and columns of the matrix.
+  /// Get the number of rows and columns of the matrix.
   /// \result The number of rows and column of the matrix.
   size_t Size() const { return size_; }
 
-  /// \brief Array operator to access a MatrixRow.
+  /// Array operator to access a MatrixRow.
   /// \param rowIndex The row index to access.
   /// \return The matrix row.
   MatrixRow& operator[](size_t rowIndex);
 
-  /// \brief Array operator to access a MatrixRow.
+  /// Array operator to access a MatrixRow.
   /// \param rowIndex The row index to access.
   /// \return The matrix row.
   const MatrixRow& operator[](size_t rowIndex) const;
 
-  /// \brief Equals operator to determine if two matrices are equal.
+  /// Equals operator to determine if two matrices are equal.
   /// \param a The matrix to compare against.
   /// \return True if the matrix values are approximately equal.
   bool operator==(const Matrix& a) const;
 
-  /// \brief Not equal operator to determine if two matrices are not equal.
+  /// Not equal operator to determine if two matrices are not equal.
   /// \param a The matrix to compare against.
   /// \return True if the matrix values are not approximately equal.
   bool operator!=(const Matrix& a) const;
 
-  /// \brief Return an indentity matrix of given size.
+  /// Return an indentity matrix of given size.
   /// \param size The size of the identity matrix.
   /// \return An identity matrix.
   static Matrix IdentityMatrix(size_t size = 4);
 
-  /// \brief Get the transpose of the matrix.
+  /// Get the transpose of the matrix.
   /// \return The transpose of the matrix.
   Matrix Transpose() const;
 
-  /// \brief Get the determinant of the matrix.
+  /// Get the determinant of the matrix.
   /// \return The determinant of the matrix.
   double Determinant() const;
 
-  /// \brief Return a submatrix with given row and column removed.
+  /// Return a submatrix with given row and column removed.
   /// \param rowRemoved The row to be removed.
   /// \param colRemoved The column to be removed.
   /// \return The submatrix of the matrix with given row and column removed.
   Matrix Submatrix(int rowRemoved, int colRemoved) const;
 
-  /// \brief Return the minor with given row and column removed.
+  /// Return the minor with given row and column removed.
   /// \param rowRemoved The row to be removed.
   /// \param colRemoved The column to be removed.
   /// \return The minor of the matrix.
   double Minor(int rowRemoved, int colRemoved) const;
 
-  /// \brief Return the cofactor with given row and column removed.
+  /// Return the cofactor with given row and column removed.
   /// \param rowRemoved The row to be removed.
   /// \param colRemoved The column to be removed.
   /// \return The cofactor of the matrix.
   double Cofactor(int rowRemoved, int colRemoved) const;
 
-  /// \brief Determine if the matrix is invertible.
+  /// Determine if the matrix is invertible.
   /// \return True if the matrix is invertible.
   bool IsInvertible() const;
 
-  /// \brief Return the inverse of the matrix.
+  /// Return the inverse of the matrix.
   /// \return The inverse of the matrix.
   Matrix Inverse() const;
 
-  /// \brief Determine if the matrix is approximately equal to given matrix.
+  /// Determine if the matrix is approximately equal to given matrix.
   /// \param a The matrix to compare against.
   /// \return True if all elements are equal within 4 significant digits.
   bool ApproximatelyEqual(const Matrix& a) const;
 
-  /// \brief Determine if the matrix is nearly equal to given matrix.
+  /// Determine if the matrix is nearly equal to given matrix.
   /// \param a The matrix to compare against.
   /// \return True if all elements are equal within 10 significant digits.
   bool NearlyEqual(const Matrix& a) const;
@@ -129,13 +129,13 @@ public:
   size_t size_;                ///< The size of the matrix.
 };
 
-/// \brief Multiply two matrices.
+/// Multiply two matrices.
 /// \param a The first matrix.
 /// \param b The second matrix.
 /// \return The result of multiplying two matrices.
 Matrix operator*(const Matrix& a, const Matrix& b);
 
-/// \brief Multiply a matrix by a tuple.
+/// Multiply a matrix by a tuple.
 /// \param a The matrix.
 /// \param b The tuple.
 /// \return The tuple resulting from the multiplication.

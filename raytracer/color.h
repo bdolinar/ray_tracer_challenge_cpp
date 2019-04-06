@@ -38,7 +38,7 @@ private:
   double blue_;  ///< Blue component from 0.0 to 1.0
 };
 
-/// \brief Color addition operator.
+/// Color addition operator.
 /// \param a The first operand.
 /// \param b The second operand.
 /// \return The result of adding the two colors.
@@ -47,7 +47,7 @@ inline Color operator+(const Color& a, const Color& b)
   return {a.Red() + b.Red(), a.Green() + b.Green(), a.Blue() + b.Blue()};
 }
 
-/// \brief Color subtraction operator.
+/// Color subtraction operator.
 /// \param a The first operand.
 /// \param b The second operand.
 /// \return The resulting of subtracting the two colors.
@@ -56,7 +56,7 @@ inline Color operator-(const Color& a, const Color& b)
   return {a.Red() - b.Red(), a.Green() - b.Green(), a.Blue() - b.Blue()};
 }
 
-/// \brief Color multiplication operator.
+/// Color multiplication operator.
 /// \param a The first operand.
 /// \param b The second operand.
 /// \return The result of multiplying the two colors.
@@ -65,7 +65,7 @@ inline Color operator*(const Color& a, const Color& b)
   return {a.Red() * b.Red(), a.Green() * b.Green(), a.Blue() * b.Blue()};
 }
 
-/// \brief Color and scalar multiplication operator.
+/// Color and scalar multiplication operator.
 /// \param a The first operand.
 /// \param b The second operand.
 /// \return The result of multiplying a color by a scalar.
@@ -74,7 +74,7 @@ inline Color operator*(const Color& a, double b)
   return {a.Red() * b, a.Green() * b, a.Blue() * b};
 }
 
-/// \brief Color division operator.
+/// Color division operator.
 /// \param a The first operand.
 /// \param b The second operand.
 /// \return The result of dividing the two colors.
@@ -83,13 +83,13 @@ inline Color operator/(const Color& a, double b)
   return {a.Red() / b, a.Green() / b, a.Blue() / b};
 }
 
-/// \brief Determine if two colors are approximately equal (within 4 digits).
+/// Determine if two colors are approximately equal (within 4 digits).
 /// \param a The first color.
 /// \param b The second color.
 bool ApproximatelyEqual(const Color& a, const Color& b);
 
 
-/// \brief Determine if two colors are nearly equal (within 10 digits).
+/// Determine if two colors are nearly equal (within 10 digits).
 /// \param a The first color.
 /// \param b The second color.
 bool NearlyEqual(const Color& a, const Color& b);

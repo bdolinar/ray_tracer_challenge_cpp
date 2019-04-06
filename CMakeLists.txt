@@ -7,6 +7,7 @@ include_directories(${CMAKE_CURRENT_LIST_DIR} libraries)
 
 # raytracer library
 set(raytracer_sources
+        raytracer/camera.cpp
         raytracer/canvas.cpp
         raytracer/color.cpp
         raytracer/intersection.cpp
@@ -15,12 +16,14 @@ set(raytracer_sources
         raytracer/matrix.cpp
         raytracer/ray.cpp
         raytracer/sphere.cpp
+        raytracer/test_utils.cpp
         raytracer/transform.cpp
         raytracer/tuple.cpp
         raytracer/world.cpp
         )
 
 set(raytracer_headers
+        raytracer/camera.h
         raytracer/canvas.h
         raytracer/color.h
         raytracer/intersection.h
@@ -29,6 +32,7 @@ set(raytracer_headers
         raytracer/matrix.h
         raytracer/ray.h
         raytracer/sphere.h
+        raytracer/test_utils.h
         raytracer/transform.h
         raytracer/tuple.h
         raytracer/world.h
@@ -39,6 +43,7 @@ add_library(raytracer ${raytracer_sources} ${raytracer_headers})
 # test executable
 set(test_sources
         tests/main.cpp
+        tests/camera_tests.cpp
         tests/canvas_tests.cpp
         tests/intersections_tests.cpp
         tests/lights_tests.cpp

@@ -1,9 +1,9 @@
 #include <raytracer/world.h>
 
+#include <raytracer/intersection.h>
 #include <raytracer/material.h>
 #include <raytracer/sphere.h>
 #include <raytracer/transform.h>
-#include "intersection.h"
 
 
 int World::ObjectCount() const

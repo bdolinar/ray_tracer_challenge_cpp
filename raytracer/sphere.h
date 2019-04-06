@@ -6,7 +6,7 @@
 #include <raytracer/material.h>
 #include <raytracer/matrix.h>
 #include <raytracer/tuple.h>
-#include "world.h"
+#include <raytracer/world.h>
 
 
 class Intersection;
@@ -16,40 +16,40 @@ class Ray;
 class Sphere
 {
 public:
-  /// \brief Construct a Sphere shared pointer.
+  /// Construct a Sphere shared pointer.
   /// \return The Sphere shared pointer.
   static std::shared_ptr<Sphere> New();
 
-  /// \brief Construct a unit sphere at the origin
+  /// Construct a unit sphere at the origin
   Sphere();
 
-  /// \brief Get the transformation matrix of the sphere.
+  /// Get the transformation matrix of the sphere.
   /// \return The transformation matrix of the sphere.
   Matrix Transform() const;
 
-  /// \brief Set the transformation matrix of the sphere.
+  /// Set the transformation matrix of the sphere.
   /// \param t The new transformation matrix of the sphere.
   void Transform(const Matrix& t);
 
-  /// \brief Get the material of the sphere.
+  /// Get the material of the sphere.
   /// \return The material of the sphere.
   Material Material() const;
 
-  /// \brief Set the material of the sphere.
+  /// Set the material of the sphere.
   /// \param m The new material of the sphere.
   void Material(const class Material& m);
 
-  /// \brief Determine if two spheres are the same object.
+  /// Determine if two spheres are the same object.
   /// \param rhs The sphere to compare against.
   /// \return True if the two spheres are the same object.
   bool operator==(const Sphere& rhs) const { return this == &rhs; }
 
-  /// \brief Get the intersections (if any) of the ray and this sphere.
+  /// Get the intersections (if any) of the ray and this sphere.
   /// \param ray The ray to intersect with the sphere.
   /// \return The intersections of the ray with this sphere.
   std::vector<Intersection> Intersect(const Ray& ray) const;
 
-  /// \brief Get the normal given a point on the surface.
+  /// Get the normal given a point on the surface.
   /// \param worldPoint The world space point on the sphere surface
   /// \return The normal vector at the surface of the sphere.
   Tuple NormalAt(Tuple worldPoint) const;
