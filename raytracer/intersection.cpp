@@ -17,3 +17,16 @@ const Intersection* Hit(const Intersections& intersections)
 
   return h;
 }
+
+
+Computations Intersection::PrepareComputations(const Ray& ray) const
+{
+  // instantiate a data structure for storing some precomputed values comps ← new computations data structure
+  // copy the intersection's properties, for convenience
+  double t = T();
+  const Sphere* object = &Object();
+  Tuple point = ray.Position(t);
+  Tuple toEye = -ray.Direction();
+  Tuple normal = object->NormalAt(point);
+  return {t, object, point, toEye, normal};
+}

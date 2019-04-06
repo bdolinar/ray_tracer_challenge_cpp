@@ -7,6 +7,16 @@
 
 class Sphere;
 
+/// \brief Store computations for ray intersection.
+struct Computations
+{
+  double t;             ///< T value along ray.
+  const Sphere* object; ///< Intersected object.
+  Tuple point;          ///< Point of intersection.
+  Tuple toEye;          ///< Vector directed to eye.
+  Tuple normal;         ///< Normal vector on object surface.
+};
+
 class Intersection
 {
 public:
@@ -31,6 +41,11 @@ public:
   /// \param[in] rhs The intersection to compare against.
   /// \return True if the intersections are equal.
   bool operator==(const Intersection& rhs) const { return t_ == rhs.t_ && object_ == rhs.object_; }
+
+  /// \brief Prepare data structure storing computations for an object intersection.
+  /// \param ray The ray the object was intersected with.
+  /// \return The computations data structure.
+  Computations PrepareComputations(const Ray& ray) const;
 
 private:
   double t_;             ///< The distance to the intersection.
