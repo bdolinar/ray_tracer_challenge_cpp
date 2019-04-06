@@ -14,6 +14,7 @@ int ScaleFraction(double val, int upperValue)
   return result;
 }
 
+
 void WritePpmValue(std::ostream& out, int value, int& lineLength)
 {
   std::string outValue = std::to_string(value);
@@ -34,6 +35,7 @@ void WritePpmValue(std::ostream& out, int value, int& lineLength)
 
 } // namespace
 
+
 Canvas::Canvas(int width, int height)
 : width_(width)
 , height_(height)
@@ -41,15 +43,18 @@ Canvas::Canvas(int width, int height)
   pixels_.resize(height, std::vector<Color>(width));
 }
 
+
 void Canvas::WritePixel(int h, int v, const Color& color)
 {
   pixels_[v][h] = color;
 }
 
+
 Color Canvas::PixelAt(int h, int v) const
 {
   return pixels_[v][h];
 }
+
 
 bool Canvas::AllPixelsAreColor(const Color& color) const
 {
@@ -66,6 +71,7 @@ bool Canvas::AllPixelsAreColor(const Color& color) const
   return true;
 }
 
+
 void Canvas::SetAllPixelColors(const Color& color)
 {
   for (auto& row : pixels_)
@@ -76,6 +82,7 @@ void Canvas::SetAllPixelColors(const Color& color)
     }
   }
 }
+
 
 void Canvas::ToPpmFile(std::ostream& output) const
 {
@@ -98,6 +105,7 @@ void Canvas::ToPpmFile(std::ostream& output) const
     output << '\n';
   }
 }
+
 
 std::string Canvas::ToPpmString() const
 {

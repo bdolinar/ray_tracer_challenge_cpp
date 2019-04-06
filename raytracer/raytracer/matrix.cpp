@@ -1,9 +1,11 @@
 #include "matrix.h"
 
+
 MatrixRow::MatrixRow()
 : m_{0}
 {
 }
+
 
 MatrixRow::MatrixRow(const std::initializer_list<double>& list)
 : m_{}
@@ -21,15 +23,18 @@ MatrixRow::MatrixRow(const std::initializer_list<double>& list)
   }
 }
 
+
 double& MatrixRow::operator[](size_t i)
 {
   return m_[i];
 }
 
+
 double MatrixRow::operator[](size_t i) const
 {
   return m_[i];
 }
+
 
 bool MatrixRow::operator==(const MatrixRow& a) const
 {
@@ -37,21 +42,25 @@ bool MatrixRow::operator==(const MatrixRow& a) const
   return equal;
 }
 
+
 bool MatrixRow::operator!=(const MatrixRow& a) const
 {
   bool equal = this->m_ != a.m_;
   return equal;
 }
 
+
 MatrixRow& Matrix::operator[](size_t colIndex)
 {
   return m_[colIndex];
 }
 
+
 const MatrixRow& Matrix::operator[](size_t colIndex) const
 {
   return m_[colIndex];
 }
+
 
 Matrix::Matrix(size_t size)
 : m_{}
@@ -60,6 +69,7 @@ Matrix::Matrix(size_t size)
   if (size > 4)
     size_ = 4;
 }
+
 
 Matrix::Matrix(const std::initializer_list<MatrixRow>& list)
 : m_{}
@@ -77,6 +87,7 @@ Matrix::Matrix(const std::initializer_list<MatrixRow>& list)
   }
 }
 
+
 bool Matrix::operator==(const Matrix& a) const
 {
   for (int row = 0; row < size_; ++row)
@@ -90,11 +101,13 @@ bool Matrix::operator==(const Matrix& a) const
   return true;
 }
 
+
 bool Matrix::operator!=(const Matrix& a) const
 {
   bool equal = *this == a;
   return !equal;
 }
+
 
 Tuple operator*(const Matrix& a, const Tuple& b)
 {
@@ -112,6 +125,7 @@ Tuple operator*(const Matrix& a, const Tuple& b)
   return Tuple(r[0], r[1], r[2], r[3]);
 }
 
+
 Matrix Matrix::IdentityMatrix(size_t size)
 {
   Matrix a(size);
@@ -119,6 +133,7 @@ Matrix Matrix::IdentityMatrix(size_t size)
     a[i][i] = 1;
   return a;
 }
+
 
 Matrix Matrix::Transpose() const
 {
@@ -132,6 +147,7 @@ Matrix Matrix::Transpose() const
   }
   return a;
 }
+
 
 double Matrix::Determinant() const
 {
@@ -150,6 +166,7 @@ double Matrix::Determinant() const
   }
   return det;
 }
+
 
 Matrix Matrix::Submatrix(int rowRemoved, int colRemoved) const
 {
@@ -170,11 +187,13 @@ Matrix Matrix::Submatrix(int rowRemoved, int colRemoved) const
   return a;
 }
 
+
 double Matrix::Minor(int rowRemoved, int colRemoved) const
 {
   double d = Submatrix(rowRemoved, colRemoved).Determinant();
   return d;
 }
+
 
 double Matrix::Cofactor(int rowRemoved, int colRemoved) const
 {
@@ -185,10 +204,12 @@ double Matrix::Cofactor(int rowRemoved, int colRemoved) const
     return -d;
 }
 
+
 bool Matrix::IsInvertible() const
 {
   return Determinant() != 0.0;
 }
+
 
 Matrix Matrix::Inverse() const
 {
@@ -207,6 +228,7 @@ Matrix Matrix::Inverse() const
   return a;
 }
 
+
 bool Matrix::ApproximatelyEqual(const Matrix& b) const
 {
   for (int row = 0; row < size_; ++row)
@@ -219,6 +241,7 @@ bool Matrix::ApproximatelyEqual(const Matrix& b) const
   }
   return true;
 }
+
 
 Matrix operator*(const Matrix& a, const Matrix& b)
 {
