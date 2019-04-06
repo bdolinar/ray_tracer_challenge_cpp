@@ -65,7 +65,7 @@ void Camera::CalculatePixelData()
 Canvas Camera::Render(const World& world)
 {
   Canvas image(hSize_, vSize_);
-  for (int y = 0; y < vSize_- 1; ++y)
+  for (int y = 0; y < vSize_; ++y)
   {
     for (int x = 0; x < hSize_; ++x)
     {

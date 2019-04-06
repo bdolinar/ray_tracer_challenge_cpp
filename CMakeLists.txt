@@ -63,3 +63,6 @@ target_link_libraries(chapter_5 raytracer)
 
 add_executable(chapter_6 chapter_6/chapter_6_main.cpp)
 target_link_libraries(chapter_6 raytracer)
+
+add_executable(chapter_7 chapter_7/chapter_7_main.cpp)
+target_link_libraries(chapter_7 raytracer)
