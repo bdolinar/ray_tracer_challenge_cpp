@@ -154,14 +154,13 @@ TEST_CASE("Chained transformations must be applied in reverse order", "[transfor
   CHECK(C * B * A * p == Point(15, 0, 7));
 }
 
-#if 0
 TEST_CASE("The transformation matrix for the default orientation", "[transformations]")
 {
   Tuple from = Point(0, 0, 0);
   Tuple to = Point(0, 0, -1);
   Tuple up = Vector(0, 1, 0);
-  auto t = view_transform(from, to, up);
-  CHECK(t == identity_matrix);
+  Matrix t = ViewTransform(from, to, up);
+  CHECK(t == Matrix::IdentityMatrix());
 }
 
 TEST_CASE("A view transformation matrix looking in positive z direction", "[transformations]")
@@ -169,8 +168,8 @@ TEST_CASE("A view transformation matrix looking in positive z direction", "[tran
   Tuple from = Point(0, 0, 0);
   Tuple to = Point(0, 0, 1);
   Tuple up = Vector(0, 1, 0);
-  auto t = view_transform(from, to, up);
-  CHECK(t == scaling(-1, 1, -1));
+  Matrix t = ViewTransform(from, to, up);
+  CHECK(t == Scaling(-1, 1, -1));
 }
 
 TEST_CASE("The view transformation moves the world", "[transformations]")
@@ -178,8 +177,8 @@ TEST_CASE("The view transformation moves the world", "[transformations]")
   Tuple from = Point(0, 0, 8);
   Tuple to = Point(0, 0, 0);
   Tuple up = Vector(0, 1, 0);
-  auto t = view_transform(from, to, up);
-  CHECK(t == translation(0, 0, -8));
+  Matrix t = ViewTransform(from, to, up);
+  CHECK(t == Translation(0, 0, -8));
 }
 
 TEST_CASE("An arbitrary view transformation", "[transformations]")
@@ -187,13 +186,12 @@ TEST_CASE("An arbitrary view transformation", "[transformations]")
   Tuple from = Point(1, 3, 2);
   Tuple to = Point(4, -2, 8);
   Tuple up = Vector(1, 1, 0);
-  auto t = view_transform(from, to, up);
-  Matrix4 expected = {
+  Matrix t = ViewTransform(from, to, up);
+  Matrix expected = {
     {-0.50709, 0.50709, 0.67612, -2.36643},
     {0.76772, 0.60609, 0.12122, -2.82843},
     {-0.35857, 0.59761, -0.71714, 0.00000},
     {0.00000, 0.00000, 0.00000, 1.00000}
   };
-  CHECK(t == expected);
+  CHECK(t.ApproximatelyEqual(expected));
 }
-#endif

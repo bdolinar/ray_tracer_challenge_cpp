@@ -80,3 +80,17 @@ Matrix Shearing(double xy, double xz, double yx, double yz, double zx, double zy
   t[2][1] = zy;
   return t;
 }
+
+Matrix ViewTransform(const Tuple& from, const Tuple& to, const Tuple& up)
+{
+  Tuple forward = (to - from).Normalize();
+  Tuple upn = up.Normalize();
+  Tuple left = Cross(forward, upn);
+  Tuple true_up = Cross(left, forward);
+  Matrix orientation = {
+    {left.x, left.y, left.z, 0},
+    {true_up.x, true_up.y, true_up.z, 0},
+    {-forward.x, -forward.y, -forward.z, 0},
+    {0, 0, 0, 1}};
+  return orientation * Translation(-from.x, -from.y, -from.z);
+}

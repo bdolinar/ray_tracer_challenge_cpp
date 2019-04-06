@@ -76,7 +76,7 @@ public:
   /// \brief Return an indentity matrix of given size.
   /// \param[in] size The size of the identity matrix.
   /// \return An identity matrix.
-  static Matrix IdentityMatrix(size_t size);
+  static Matrix IdentityMatrix(size_t size = 4);
 
   /// \brief Get the transpose of the matrix.
   /// \return The transpose of the matrix.
