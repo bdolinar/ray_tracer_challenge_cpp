@@ -1,5 +1,6 @@
 #pragma once
 
+/// A color tuple.
 class Color
 {
 public:
@@ -38,8 +39,8 @@ private:
 };
 
 /// \brief Color addition operator.
-/// \param[in] a The first operand.
-/// \param[in] b The second operand.
+/// \param a The first operand.
+/// \param b The second operand.
 /// \return The result of adding the two colors.
 inline Color operator+(const Color& a, const Color& b)
 {
@@ -47,8 +48,8 @@ inline Color operator+(const Color& a, const Color& b)
 }
 
 /// \brief Color subtraction operator.
-/// \param[in] a The first operand.
-/// \param[in] b The second operand.
+/// \param a The first operand.
+/// \param b The second operand.
 /// \return The resulting of subtracting the two colors.
 inline Color operator-(const Color& a, const Color& b)
 {
@@ -56,8 +57,8 @@ inline Color operator-(const Color& a, const Color& b)
 }
 
 /// \brief Color multiplication operator.
-/// \param[in] a The first operand.
-/// \param[in] b The second operand.
+/// \param a The first operand.
+/// \param b The second operand.
 /// \return The result of multiplying the two colors.
 inline Color operator*(const Color& a, const Color& b)
 {
@@ -65,8 +66,8 @@ inline Color operator*(const Color& a, const Color& b)
 }
 
 /// \brief Color and scalar multiplication operator.
-/// \param[in] a The first operand.
-/// \param[in] b The second operand.
+/// \param a The first operand.
+/// \param b The second operand.
 /// \return The result of multiplying a color by a scalar.
 inline Color operator*(const Color& a, double b)
 {
@@ -74,8 +75,8 @@ inline Color operator*(const Color& a, double b)
 }
 
 /// \brief Color division operator.
-/// \param[in] a The first operand.
-/// \param[in] b The second operand.
+/// \param a The first operand.
+/// \param b The second operand.
 /// \return The result of dividing the two colors.
 inline Color operator/(const Color& a, double b)
 {
@@ -83,12 +84,12 @@ inline Color operator/(const Color& a, double b)
 }
 
 /// \brief Determine if two colors are approximately equal (within 4 digits).
-/// \param[in] a The first color.
-/// \param[in] b The second color.
+/// \param a The first color.
+/// \param b The second color.
 bool ApproximatelyEqual(const Color& a, const Color& b);
 
 
 /// \brief Determine if two colors are nearly equal (within 10 digits).
-/// \param[in] a The first color.
-/// \param[in] b The second color.
+/// \param a The first color.
+/// \param b The second color.
 bool NearlyEqual(const Color& a, const Color& b);
