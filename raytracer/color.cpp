@@ -2,18 +2,12 @@
 
 #include <algorithm>
 #include <cmath>
-#include "color.h"
+#include <raytracer/color.h>
+#include <raytracer/test_utils.h>
 
 
 namespace
 {
-bool EqualToDigits(double a, double b, int digits)
-{
-  double positiveDiff = fabs(a - b);
-  double positiveMax = pow(0.1, digits) * std::max(fabs(a), fabs(b));
-  return positiveDiff <= positiveMax;
-}
-
 } // namespace
 
 

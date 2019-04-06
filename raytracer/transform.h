@@ -5,36 +5,36 @@
 class Matrix;
 class Tuple;
 
-/// \brief Build transformation matrix for translation.
+/// Build transformation matrix for translation.
 /// \param xTranslation The offset to translate x coordinate.
 /// \param yTranslation The offset to translate y coordinate.
 /// \param zTranslation The offset to translate z coordinate.
 /// \return The translation transformation matrix.
 Matrix Translation(double xTranslation, double yTranslation, double zTranslation);
 
-/// \brief Build transformation matrix for scaling.
+/// Build transformation matrix for scaling.
 /// \param xScale The factor to scale x coordinate.
 /// \param yScale The factor to scale y coordinate.
 /// \param zScale The factor to scale z coordinate.
 /// \return The scaling transformation matrix.
 Matrix Scaling(double xScale, double yScale, double zScale);
 
-/// \brief Build transformation matrix for rotation about the x-axis.
+/// Build transformation matrix for rotation about the x-axis.
 /// \param radians The amount to rotate in radians.
 /// \return The rotation transformation matrix.
 Matrix RotationX(double radians);
 
-/// \brief Build transformation matrix for rotation about the y-axis.
+/// Build transformation matrix for rotation about the y-axis.
 /// \param radians The amount to rotate in radians.
 /// \return The rotation transformation matrix.
 Matrix RotationY(double radians);
 
-/// \brief Build transformation matrix for rotation about the z-axis.
+/// Build transformation matrix for rotation about the z-axis.
 /// \param radians The amount to rotate in radians.
 /// \return The rotation transformation matrix.
 Matrix RotationZ(double radians);
 
-/// \brief Build transformation matrix for shearing.
+/// Build transformation matrix for shearing.
 /// \param xy Shear of x in proportion to y.
 /// \param xz Shear of x in proportion to z.
 /// \param yx Shear of y in proportion to x.
@@ -44,7 +44,7 @@ Matrix RotationZ(double radians);
 /// \return The shearing transformation matrix.
 Matrix Shearing(double xy, double xz, double yx, double yz, double zx, double zy);
 
-/// \brief Build view transformation matrix.
+/// Build view transformation matrix.
 /// \param from The point looked from (where the eye is located).
 /// \param to The point be looked at.
 /// \param up A vector in the up direction.

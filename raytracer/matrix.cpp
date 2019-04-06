@@ -1,4 +1,5 @@
 #include <raytracer/matrix.h>
+#include <raytracer/test_utils.h>
 
 
 MatrixRow::MatrixRow()
