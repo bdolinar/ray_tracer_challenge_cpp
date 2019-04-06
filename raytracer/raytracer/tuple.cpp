@@ -7,9 +7,9 @@
 bool Tuple::operator==(const Tuple& rhs) const
 {
   bool equalX = EqualToDigits(x, rhs.x, 10);
-  bool equalY = EqualToDigits(x, rhs.x, 10);
-  bool equalZ = EqualToDigits(x, rhs.x, 10);
-  bool equalW = EqualToDigits(x, rhs.x, 10);
+  bool equalY = EqualToDigits(y, rhs.y, 10);
+  bool equalZ = EqualToDigits(z, rhs.z, 10);
+  bool equalW = EqualToDigits(w, rhs.w, 10);
   return equalX && equalY && equalZ && equalW;
 }
 
@@ -52,6 +52,12 @@ Tuple Cross(const Tuple& a, const Tuple& b)
 }
 
 
+Tuple Reflect(const Tuple& inVector, const Tuple& normal)
+{
+  return inVector - normal * 2 * Dot(inVector, normal);
+}
+
+
 bool ApproximatelyEqual(const Tuple& a, const Tuple& b)
 {
   bool equalX = EqualToDigits(a.x, b.x, 4);
@@ -71,6 +77,11 @@ bool ApproximatelyEqual(double a, double b)
 
 bool EqualToDigits(double a, double b, int digits)
 {
+  if (a == 0.0)
+    return fabs(b) < pow(0.1, digits);
+  else if (b == 0.0)
+    return fabs(a) < pow(0.1, digits);
+
   double positiveDiff = fabs(a - b);
   double positiveMax = pow(0.1, digits) * std::max(fabs(a), fabs(b));
   return positiveDiff <= positiveMax;

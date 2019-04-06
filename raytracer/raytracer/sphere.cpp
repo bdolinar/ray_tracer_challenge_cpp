@@ -23,6 +23,18 @@ void Sphere::Transform(const Matrix& t)
 }
 
 
+Material Sphere::Material() const
+{
+  return material_;
+}
+
+
+void Sphere::Material(const class Material& m)
+{
+  material_ = m;
+}
+
+
 Intersections Sphere::Intersect(const Ray& ray)
 {
   // use a ray translated to sphere coordinates to intersect
@@ -42,4 +54,14 @@ Intersections Sphere::Intersect(const Ray& ray)
     std::swap(t1, t2);
   intersections = {{t1, *this}, {t2, *this}};
   return intersections;
+}
+
+
+Tuple Sphere::NormalAt(Tuple worldPoint) const
+{
+  Tuple objectPoint = Transform().Inverse() * worldPoint;
+  Tuple objectNormal = objectPoint - Point(0, 0, 0);
+  Tuple worldNormal = Transform().Inverse().Transpose() * objectNormal;
+  worldNormal.w = 0;
+  return worldNormal.Normalize();
 }

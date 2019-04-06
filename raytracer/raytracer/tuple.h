@@ -126,6 +126,12 @@ double Dot(const Tuple& a, const Tuple& b);
 /// \return The cross product of the two vectors.
 Tuple Cross(const Tuple& a, const Tuple& b);
 
+/// \brief Calculate the reflection of an incoming vector off of a surface.
+/// \param[in] inVector The incoming vector to reflect off of surface.
+/// \param[in] normal The normal vector of the surface.
+/// \return The reflection vector.
+Tuple Reflect(const Tuple& inVector, const Tuple& normal);
+
 /// \brief Determine if two tuples are approximately equal.
 /// \param[in] a The first tuple.
 /// \param[in] b The second tuple.
