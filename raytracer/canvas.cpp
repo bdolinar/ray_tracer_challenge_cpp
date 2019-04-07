@@ -2,67 +2,69 @@
 
 #include <sstream>
 
+
 namespace
 {
-int ScaleFraction(double val, int upperValue)
+//------------------------------------------------------------------------------
+int scale_fraction(double a_val, int a_upper_value)
 {
-  int result = static_cast<int>(val * (upperValue + 1));
-  if (result > upperValue)
-    result = upperValue;
+  int result = static_cast<int>(a_val * (a_upper_value + 1));
+  if (result > a_upper_value)
+    result = a_upper_value;
   else if (result < 0)
     result = 0;
   return result;
 }
 
-
-void WritePpmValue(std::ostream& out, int value, int& lineLength)
+//------------------------------------------------------------------------------
+void write_ppm_value(std::ostream& a_out, int a_value, int& a_line_length)
 {
-  std::string outValue = std::to_string(value);
-  int valueLength = (int)outValue.size();
-  if (lineLength + valueLength + 1 > 70)
+  std::string out_value = std::to_string(a_value);
+  int value_length = (int) out_value.size();
+  if (a_line_length + value_length + 1 > 70)
   {
-    out << '\n';
-    lineLength = 0;
+    a_out << '\n';
+    a_line_length = 0;
   }
-  if (lineLength != 0)
+  if (a_line_length != 0)
   {
-    out << " ";
-    ++lineLength;
+    a_out << " ";
+    ++a_line_length;
   }
-  out << value;
-  lineLength += valueLength;
+  a_out << a_value;
+  a_line_length += value_length;
 }
-
 } // namespace
 
 
-Canvas::Canvas(int width, int height)
-: width_(width)
-, height_(height)
+//------------------------------------------------------------------------------
+Canvas::Canvas(int a_width, int a_height)
+    : width_(a_width)
+      , height_(a_height)
 {
-  pixels_.resize(height, std::vector<Color>(width));
+  pixels_.resize(a_height, std::vector<Color>(a_width));
 }
 
-
-void Canvas::WritePixel(int h, int v, const Color& color)
+//------------------------------------------------------------------------------
+void Canvas::write_pixel(int a_h, int a_v, const Color& a_color)
 {
-  pixels_[v][h] = color;
+  pixels_[a_v][a_h] = a_color;
 }
 
-
-Color Canvas::PixelAt(int h, int v) const
+//------------------------------------------------------------------------------
+Color Canvas::pixel_at(int a_h, int a_v) const
 {
-  return pixels_[v][h];
+  return pixels_[a_v][a_h];
 }
 
-
-bool Canvas::AllPixelsAreColor(const Color& color) const
+//------------------------------------------------------------------------------
+bool Canvas::all_pixels_are_color(const Color& a_color) const
 {
   for (auto& row : pixels_)
   {
     for (auto& pixel : row)
     {
-      if (!(pixel == color))
+      if (!(pixel == a_color))
       {
         return false;
       }
@@ -71,45 +73,45 @@ bool Canvas::AllPixelsAreColor(const Color& color) const
   return true;
 }
 
-
-void Canvas::SetAllPixelColors(const Color& color)
+//------------------------------------------------------------------------------
+void Canvas::set_all_pixel_colors(const Color& a_color)
 {
   for (auto& row : pixels_)
   {
     for (auto& pixel : row)
     {
-      pixel = color;
+      pixel = a_color;
     }
   }
 }
 
-
-void Canvas::ToPpmFile(std::ostream& output) const
+//------------------------------------------------------------------------------
+void Canvas::to_ppm_file(std::ostream& a_output) const
 {
-  output << "P3\n";
-  output << width_ << " " << height_ << "\n";
-  output << "255\n";
+  a_output << "P3\n";
+  a_output << width_ << " " << height_ << "\n";
+  a_output << "255\n";
 
   for (auto& row : pixels_)
   {
-    int lineLength = 0;
+    int line_length = 0;
     for (auto& pixel : row)
     {
-      int red = ScaleFraction(pixel.Red(), 255);
-      WritePpmValue(output, red, lineLength);
-      int green = ScaleFraction(pixel.Green(), 255);
-      WritePpmValue(output, green, lineLength);
-      int blue = ScaleFraction(pixel.Blue(), 255);
-      WritePpmValue(output, blue, lineLength);
+      int red = scale_fraction(pixel.red(), 255);
+      write_ppm_value(a_output, red, line_length);
+      int green = scale_fraction(pixel.green(), 255);
+      write_ppm_value(a_output, green, line_length);
+      int blue = scale_fraction(pixel.blue(), 255);
+      write_ppm_value(a_output, blue, line_length);
     }
-    output << '\n';
+    a_output << '\n';
   }
 }
 
-
-std::string Canvas::ToPpmString() const
+//------------------------------------------------------------------------------
+std::string Canvas::to_ppm_string() const
 {
   std::ostringstream out;
-  ToPpmFile(out);
+  to_ppm_file(out);
   return out.str();
 }

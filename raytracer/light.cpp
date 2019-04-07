@@ -3,26 +3,28 @@
 #include <memory>
 
 
-std::shared_ptr<Light> Light::New(const Tuple& position, const Color& intensity)
+//------------------------------------------------------------------------------
+std::shared_ptr<Light>
+Light::new_ptr(const Tuple& a_position, const Color& a_intensity)
 {
-  return std::make_shared<Light>(position, intensity);
+  return std::make_shared<Light>(a_position, a_intensity);
 }
 
-
-Light::Light(const Tuple& position, const Color& intensity)
-: position_(position)
-, intensity_(intensity)
+//------------------------------------------------------------------------------
+Light::Light(const Tuple& a_position, const Color& a_intensity)
+    : position_(a_position)
+      , intensity_(a_intensity)
 {
 }
 
-
-const Tuple& Light::Position() const
+//------------------------------------------------------------------------------
+const Tuple& Light::position() const
 {
   return position_;
 }
 
-
-const Color& Light::Intensity() const
+//------------------------------------------------------------------------------
+const Color& Light::intensity() const
 {
   return intensity_;
 }

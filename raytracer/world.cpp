@@ -6,86 +6,89 @@
 #include <raytracer/transform.h>
 
 
-int World::ObjectCount() const
+//------------------------------------------------------------------------------
+int World::object_count() const
 {
   return static_cast<int>(objects_.size());
 }
 
-
-Sphere& World::Object(int objectIndex)
+//------------------------------------------------------------------------------
+Sphere& World::object(int a_object_index)
 {
-  return *objects_.at(objectIndex);
+  return *objects_.at(a_object_index);
 }
 
-
-void World::AddObject(std::shared_ptr<Sphere> object)
+//------------------------------------------------------------------------------
+void World::add_object(const std::shared_ptr<Sphere>& a_object)
 {
-  objects_.push_back(object);
+  objects_.push_back(a_object);
 }
 
-
-void World::AddLight(std::shared_ptr<::Light> light)
+//------------------------------------------------------------------------------
+void World::set_light(std::shared_ptr<::Light> a_light)
 {
-  light_ = light;
+  light_ = a_light;
 }
 
-
-std::vector<Intersection> World::Intersect(const Ray& ray) const
+//------------------------------------------------------------------------------
+std::vector<Intersection> World::intersect(const Ray& a_ray) const
 {
   std::vector<Intersection> intersections;
-  std::vector<Intersection> objectIntersections;
+  std::vector<Intersection> object_intersections;
   for (const auto& object : objects_)
   {
-    objectIntersections = object->Intersect(ray);
-    intersections.insert(intersections.end(), objectIntersections.begin(),
-                         objectIntersections.end());
+    object_intersections = object->intersect(a_ray);
+    intersections.insert(intersections.end(), object_intersections.begin(),
+                         object_intersections.end());
   }
   std::sort(intersections.begin(), intersections.end(),
-            [](const Intersection& i1, const Intersection& i2) { return i1.T() < i2.T(); });
+            [](const Intersection& a_lhs, const Intersection& a_rhs)
+            { return a_lhs.t() < a_rhs.t(); });
   return intersections;
 }
 
-
-Color World::ShadeHit(const Computations& computations) const
+//------------------------------------------------------------------------------
+Color World::shade_hit(const Computations& a_computations) const
 {
-  return Lighting(computations.object->Material(), *light_,
-    computations.point, computations.toEye, computations.normal);
+  return lighting(a_computations.object->material(), *light_,
+                  a_computations.point, a_computations.to_eye,
+                  a_computations.normal);
 }
 
-
-Color World::ColorAt(const Ray& ray) const
+//------------------------------------------------------------------------------
+Color World::color_at(const Ray& a_ray) const
 {
-  std::vector<Intersection> intersections = Intersect(ray);
-  const Intersection* intersection = Hit(intersections);
+  std::vector<Intersection> intersections = intersect(a_ray);
+  const Intersection* intersection = hit(intersections);
   Color color;
   if (intersection)
   {
-    Computations computations = intersection->PrepareComputations(ray);
-    color = ShadeHit(computations);
+    Computations computations = intersection->prepare_computations(a_ray);
+    color = shade_hit(computations);
   }
 
   return color;
 }
 
-
-World DefaultWorld()
+//------------------------------------------------------------------------------
+World default_world()
 {
   World world;
-  auto light = Light::New(Point(-10, 10, -10), Color(1, 1, 1));
-  world.AddLight(light);
+  auto light = Light::new_ptr(point(-10, 10, -10), Color(1, 1, 1));
+  world.set_light(light);
 
   Material material;
-  material.Color(Color(0.8, 1.0, 0.6));
-  material.Diffuse(0.7);
-  material.Specular(0.2);
+  material.set_color(Color(0.8, 1.0, 0.6));
+  material.set_diffuse(0.7);
+  material.set_specular(0.2);
 
-  std::shared_ptr<Sphere> s1 = Sphere::New();
-  s1->Material(material);
-  world.AddObject(s1);
+  std::shared_ptr<Sphere> s1 = Sphere::new_ptr();
+  s1->set_material(material);
+  world.add_object(s1);
 
-  std::shared_ptr<Sphere> s2 = Sphere::New();
-  s2->Transform(Scaling(0.5, 0.5, 0.5));
-  world.AddObject(s2);
+  std::shared_ptr<Sphere> s2 = Sphere::new_ptr();
+  s2->set_transform(scaling(0.5, 0.5, 0.5));
+  world.add_object(s2);
 
   return world;
 }

@@ -1,14 +1,15 @@
 #include <raytracer/intersection.h>
 
 
-const Intersection* Hit(const Intersections& intersections)
+//------------------------------------------------------------------------------
+const Intersection* hit(const Intersections& a_intersections)
 {
   const Intersection* h = nullptr;
-  for (auto& intersection : intersections)
+  for (auto& intersection : a_intersections)
   {
-    if (intersection.T() > 0)
+    if (intersection.t() > 0)
     {
-      if (!h || intersection.T() < h->T())
+      if (!h || intersection.t() < h->t())
       {
         h = &intersection;
       }
@@ -18,25 +19,24 @@ const Intersection* Hit(const Intersections& intersections)
   return h;
 }
 
-
-Computations Intersection::PrepareComputations(const Ray& ray) const
+//------------------------------------------------------------------------------
+Computations Intersection::prepare_computations(const Ray& a_ray) const
 {
-  // instantiate a data structure for storing some precomputed values comps ← new computations data structure
-  // copy the intersection's properties, for convenience
-  double t = T();
-  const Sphere* object = &Object();
-  Tuple point = ray.Position(t);
-  Tuple toEye = -ray.Direction();
-  Tuple normal = object->NormalAt(point);
-  bool inside = false;
-  if (Dot(normal, toEye) < 0)
+  double t_value = t();
+  const Sphere* object_value = &object();
+  Tuple point = a_ray.position(t_value);
+  Tuple to_eye = -a_ray.direction();
+  Tuple normal = object_value->normal_at(point);
+
+  bool inside;
+  if (dot(normal, to_eye) < 0)
   {
     inside = true;
-    normal = - normal;
+    normal = -normal;
   }
   else
   {
     inside = false;
   }
-  return {t, object, point, toEye, normal, inside};
+  return {t_value, object_value, point, to_eye, normal, inside};
 }

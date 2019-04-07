@@ -5,77 +5,83 @@
 #include <raytracer/test_utils.h>
 
 
-bool Tuple::IsPoint() const
+//------------------------------------------------------------------------------
+bool Tuple::is_point() const
 {
-  return w == 1.0;
+  return w_ == 1.0;
 }
 
-
-bool Tuple::IsVector() const
+//------------------------------------------------------------------------------
+bool Tuple::is_vector() const
 {
-  return w == 0.0;
+  return w_ == 0.0;
 }
 
-
-double Tuple::Magnitude() const
+//------------------------------------------------------------------------------
+double Tuple::magnitude() const
 {
-  return sqrt(x * x + y * y + z * z + w * w);
+  return sqrt(x_ * x_ + y_ * y_ + z_ * z_ + w_ * w_);
 }
 
-
-Tuple Tuple::Normalize() const
+//------------------------------------------------------------------------------
+Tuple Tuple::normalize() const
 {
-  double mag = Magnitude();
-  return {x / mag, y / mag, z / mag, w / mag};
+  double mag = magnitude();
+  return {x_ / mag, y_ / mag, z_ / mag, w_ / mag};
 }
 
-
-bool Tuple::operator==(const Tuple& rhs) const
+//------------------------------------------------------------------------------
+bool Tuple::operator==(const Tuple& a_rhs) const
 {
-  return std::tie(x, y, z, w) == std::tie(rhs.x, rhs.y, rhs.z, rhs.w);
+  return std::tie(x_, y_, z_, w_) ==
+         std::tie(a_rhs.x_, a_rhs.y_, a_rhs.z_, a_rhs.w_);
 }
 
-
-bool Tuple::operator!=(const Tuple& rhs) const
+//------------------------------------------------------------------------------
+bool Tuple::operator!=(const Tuple& a_rhs) const
 {
-  return !(rhs == *this);
+  return !(a_rhs == *this);
 }
 
-
-double Dot(const Tuple& a, const Tuple& b)
+//------------------------------------------------------------------------------
+double dot(const Tuple& a_lhs, const Tuple& a_rhs)
 {
-  double result = a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+  double result =
+      a_lhs.x_ * a_rhs.x_ + a_lhs.y_ * a_rhs.y_ + a_lhs.z_ * a_rhs.z_ +
+      a_lhs.w_ * a_rhs.w_;
   return result;
 }
 
-
-Tuple Cross(const Tuple& a, const Tuple& b)
+//------------------------------------------------------------------------------
+Tuple cross(const Tuple& a_lhs, const Tuple& a_rhs)
 {
-  return Vector(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
+  return vector(a_lhs.y_ * a_rhs.z_ - a_lhs.z_ * a_rhs.y_,
+                a_lhs.z_ * a_rhs.x_ - a_lhs.x_ * a_rhs.z_,
+                a_lhs.x_ * a_rhs.y_ - a_lhs.y_ * a_rhs.x_);
 }
 
-
-Tuple Reflect(const Tuple& inVector, const Tuple& normal)
+//------------------------------------------------------------------------------
+Tuple reflect(const Tuple& a_in_vector, const Tuple& a_normal)
 {
-  return inVector - normal * 2 * Dot(inVector, normal);
+  return a_in_vector - a_normal * 2 * dot(a_in_vector, a_normal);
 }
 
-
-bool ApproximatelyEqual(const Tuple& a, const Tuple& b)
+//------------------------------------------------------------------------------
+bool approximately_equal(const Tuple& a_lhs, const Tuple& a_rhs)
 {
-  bool equalX = EqualToDigits(a.x, b.x, 4);
-  bool equalY = EqualToDigits(a.y, b.y, 4);
-  bool equalZ = EqualToDigits(a.z, b.z, 4);
-  bool equalW = EqualToDigits(a.w, b.w, 4);
-  return equalX && equalY && equalZ && equalW;
+  bool equal_x = equal_to_digits(a_lhs.x_, a_rhs.x_, 4);
+  bool equal_y = equal_to_digits(a_lhs.y_, a_rhs.y_, 4);
+  bool equal_z = equal_to_digits(a_lhs.z_, a_rhs.z_, 4);
+  bool equal_w = equal_to_digits(a_lhs.w_, a_rhs.w_, 4);
+  return equal_x && equal_y && equal_z && equal_w;
 }
 
-
-bool NearlyEqual(const Tuple& a, const Tuple& b)
+//------------------------------------------------------------------------------
+bool nearly_equal(const Tuple& a_lhs, const Tuple& a_rhs)
 {
-  bool equalX = EqualToDigits(a.x, b.x, 10);
-  bool equalY = EqualToDigits(a.y, b.y, 10);
-  bool equalZ = EqualToDigits(a.z, b.z, 10);
-  bool equalW = EqualToDigits(a.w, b.w, 10);
-  return equalX && equalY && equalZ && equalW;
+  bool equal_x = equal_to_digits(a_lhs.x_, a_rhs.x_, 10);
+  bool equal_y = equal_to_digits(a_lhs.y_, a_rhs.y_, 10);
+  bool equal_z = equal_to_digits(a_lhs.z_, a_rhs.z_, 10);
+  bool equal_w = equal_to_digits(a_lhs.w_, a_rhs.w_, 10);
+  return equal_x && equal_y && equal_z && equal_w;
 }

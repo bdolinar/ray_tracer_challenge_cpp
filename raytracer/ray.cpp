@@ -3,14 +3,15 @@
 #include <raytracer/matrix.h>
 
 
-Tuple Ray::Position(double t) const
+//------------------------------------------------------------------------------
+Tuple Ray::position(double a_t) const
 {
-  return Origin() + Direction() * t;
+  return origin() + direction() * a_t;
 }
 
-
-Ray Ray::Transform(const Matrix& m) const
+//------------------------------------------------------------------------------
+Ray Ray::transform(const Matrix& a_transform) const
 {
-  Ray r = {m * Origin(), m * Direction()};
+  Ray r = {a_transform * origin(), a_transform * direction()};
   return r;
 }

@@ -5,71 +5,96 @@
 #include <raytracer/ray.h>
 #include <raytracer/world.h>
 
+
 /// Camera describing where the world will be rendered from.
 class Camera
 {
 public:
   /// Construct a camera.
-  /// \param hsize The horizontal size in pixels.
-  /// \param vsize The vertical size in pixels.
-  /// \param fieldOfView The field of view in radians.
-  Camera(int hsize, int vsize, double fieldOfView);
+  /// \param a_h_size The horizontal size in pixels.
+  /// \param a_v_size The vertical size in pixels.
+  /// \param a_field_of_view The field of view in radians.
+  Camera(int a_h_size, int a_v_size, double a_field_of_view);
 
-  /// Get the orizontal size.
+  /// Get the horizontal size.
   /// \return The horizontal size in pixels.
-  int HSize() const { return hSize_; }
+  int h_size() const
+  {
+    return h_size_;
+  }
 
   /// Set the horizontal size.
-  /// \param hSize The horizontal size in pixels.
-  void HSize(int hSize) { hSize_ = hSize; }
+  /// \param a_h_size The horizontal size in pixels.
+  void set_h_size(int a_h_size)
+  {
+    h_size_ = a_h_size;
+  }
 
   /// Get the vertical size.
   /// \return The vertical size in pixels.
-  int VSize() const { return vSize_; }
+  int v_size() const
+  {
+    return v_size_;
+  }
 
   /// Set the vertical size.
-  /// \param vSize The vertical size in pixels.
-  void VSize(int vSize) { vSize_ = vSize; }
+  /// \param a_v_size The vertical size in pixels.
+  void set_v_size(int a_v_size)
+  {
+    v_size_ = a_v_size;
+  }
 
   /// Get the field of view.
   /// \return The field of view.
-  double FieldOfView() const { return fieldOfView_; }
+  double field_of_view() const
+  {
+    return field_of_view_;
+  }
 
   /// Set the field of view.
-  /// \param fieldOfView The field of view.
-  void FieldOfView(double fieldOfView) { fieldOfView_ = fieldOfView; }
+  /// \param a_field_of_view The field of view.
+  void set_field_of_view(double a_field_of_view)
+  {
+    field_of_view_ = a_field_of_view;
+  }
 
   /// Get the transformation matrix of the world.
   /// \return The transformation matrix of the world.
-  const Matrix& Transform() const { return transform_; }
+  const Matrix& transform() const
+  {
+    return transform_;
+  }
 
   /// Set the transformation matrix of the world.
-  /// \param transform The transformation matrix of the world.
-  void Transform(const Matrix& transform) { transform_ = transform; }
+  /// \param a_transform The transformation matrix of the world.
+  void set_transform(const Matrix& a_transform)
+  {
+    transform_ = a_transform;
+  }
 
   /// Get the world size of a pixel.
   /// \return The world size of a pixel.
-  double PixelSize() const;
+  double pixel_size() const;
 
   /// Build a ray from the camera eye through a pixel.
-  /// \param px The X coordinate of the pixel.
-  /// \param py The Y coordinate of the pixel.
+  /// \param a_px The X coordinate of the pixel.
+  /// \param a_py The Y coordinate of the pixel.
   /// \return The ray from the camera eye through the given pixel.
-  Ray RayForPixel(double px, double py);
+  Ray ray_for_pixel(double a_px, double a_py) const;
 
   /// Render the world.
-  /// \param world The world to render.
+  /// \param a_world The world to render.
   /// \return The canvas of rendered pixels.
-  Canvas Render(const World& world);
+  Canvas render(const World& a_world) const;
 
 private:
-  void CalculatePixelData();
+  void calculate_pixel_data();
 
-  int hSize_;           ///< The horizontal size in pixels.
-  int vSize_;           ///< The vertical size in pixels.
-  double fieldOfView_;  ///< The field of view.
-  Matrix transform_;    ///< The world transformation matrix.
-  double halfWidth_;    ///< Half the width of the view.
-  double halfHeight_;   ///< Half the hight of the view.
-  double pixelSize_;    ///< The world size of a pixel.
+  int h_size_;            ///< The horizontal size in pixels.
+  int v_size_;            ///< The vertical size in pixels.
+  double field_of_view_;  ///< The field of view.
+  Matrix transform_;      ///< The world transformation matrix.
+  double half_width_;     ///< Half the width of the view.
+  double half_height_;    ///< Half the height of the view.
+  double pixel_size_;     ///< The world size of a pixel.
 };

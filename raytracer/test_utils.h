@@ -1,14 +1,16 @@
 #pragma once
 
 /// Determine if two doubles are approximately equal.
-/// \param a The first double.
-/// \param b The second double.
-bool ApproximatelyEqual(double a, double b);
+/// \param a_lhs The first double.
+/// \param a_rhs The second double.
+bool approximately_equal(double a_lhs, double a_rhs);
+
 /// Determine if two doubles are nearly equal.
-/// \param a The first double.
-/// \param b The second double.
-bool NearlyEqual(double a, double b);
+/// \param a_lhs The first double.
+/// \param a_rhs The second double.
+bool nearly_equal(double a_lhs, double a_rhs);
+
 /// Determine if two doubles are equal within a given number of digits.
-/// \param a The first double.
-/// \param b The second double.
-bool EqualToDigits(double a, double b, int digits);
+/// \param a_lhs The first double.
+/// \param a_rhs The second double.
+bool equal_to_digits(double a_lhs, double a_rhs, int a_digits);

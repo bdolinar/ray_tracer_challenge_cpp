@@ -4,27 +4,29 @@
 #include <algorithm>
 
 
-bool ApproximatelyEqual(double a, double b)
+//------------------------------------------------------------------------------
+bool approximately_equal(double a_lhs, double a_rhs)
 {
-  bool equal = EqualToDigits(a, b, 3);
+  bool equal = equal_to_digits(a_lhs, a_rhs, 3);
   return equal;
 }
 
-
-bool NearlyEqual(double a, double b)
+//------------------------------------------------------------------------------
+bool nearly_equal(double a_lhs, double a_rhs)
 {
-  bool equal = EqualToDigits(a, b, 10);
+  bool equal = equal_to_digits(a_lhs, a_rhs, 10);
   return equal;
 }
 
-bool EqualToDigits(double a, double b, int digits)
+//------------------------------------------------------------------------------
+bool equal_to_digits(double a_lhs, double a_rhs, int a_digits)
 {
-  if (a == 0.0)
-    return fabs(b) < pow(0.1, digits);
-  else if (b == 0.0)
-    return fabs(a) < pow(0.1, digits);
+  if (a_lhs == 0.0)
+    return fabs(a_rhs) < pow(0.1, a_digits);
+  else if (a_rhs == 0.0)
+    return fabs(a_lhs) < pow(0.1, a_digits);
 
-  double positiveDiff = fabs(a - b);
-  double positiveMax = pow(0.1, digits) * std::max(fabs(a), fabs(b));
-  return positiveDiff <= positiveMax;
+  double positive_diff = fabs(a_lhs - a_rhs);
+  double positive_max = pow(0.1, a_digits) * std::max(fabs(a_lhs), fabs(a_rhs));
+  return positive_diff <= positive_max;
 }
