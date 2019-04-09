@@ -32,11 +32,11 @@ public:
 
   /// Add an object to the world.
   /// \param a_object The object to add to the world.
-  void add_object(const std::shared_ptr<Sphere>& a_object);
+  void add_object(std::unique_ptr<Sphere> a_object);
 
   /// Set the world light.
   /// \param a_light The light to add to the world.
-  void set_light(std::shared_ptr<::Light> a_light);
+  void set_light(std::unique_ptr<::Light> a_light);
 
   /// Get the intersections of a ray with the world.
   /// \param a_ray The ray to intersect with the world.
@@ -54,8 +54,8 @@ public:
   Color color_at(const Ray& a_ray) const;
 
 private:
-  std::vector<std::shared_ptr<Sphere>> objects_; ///< The worlds objects.
-  std::shared_ptr<::Light> light_;               ///< The worlds light.
+  std::vector<std::unique_ptr<Sphere>> objects_; ///< The worlds objects.
+  std::unique_ptr<::Light> light_;               ///< The worlds light.
 };
 
 /// Get the default world which contains two spheres and a light.

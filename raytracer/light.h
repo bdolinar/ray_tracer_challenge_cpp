@@ -15,7 +15,7 @@ public:
   /// \param a_position The position of the light in world space.
   /// \param a_intensity The brightness and color of the light.
   /// \return The Light shared pointer.
-  static std::shared_ptr<Light>
+  static std::unique_ptr<Light>
   new_ptr(const Tuple& a_position, const Color& a_intensity);
 
   /// Construct a light.

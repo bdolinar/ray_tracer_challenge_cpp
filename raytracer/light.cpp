@@ -4,10 +4,10 @@
 
 
 //------------------------------------------------------------------------------
-std::shared_ptr<Light>
+std::unique_ptr<Light>
 Light::new_ptr(const Tuple& a_position, const Color& a_intensity)
 {
-  return std::make_shared<Light>(a_position, a_intensity);
+  return std::make_unique<Light>(a_position, a_intensity);
 }
 
 //------------------------------------------------------------------------------

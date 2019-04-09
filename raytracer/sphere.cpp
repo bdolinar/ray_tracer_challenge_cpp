@@ -6,9 +6,9 @@
 
 
 //------------------------------------------------------------------------------
-std::shared_ptr<Sphere> Sphere::new_ptr()
+std::unique_ptr<Sphere> Sphere::new_ptr()
 {
-  return std::shared_ptr<Sphere>(new Sphere);
+  return std::unique_ptr<Sphere>(new Sphere);
 }
 
 

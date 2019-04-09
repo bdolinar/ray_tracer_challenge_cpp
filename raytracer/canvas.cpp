@@ -36,7 +36,6 @@ void write_ppm_value(std::ostream& a_out, int a_value, int& a_line_length)
 }
 } // namespace
 
-
 //------------------------------------------------------------------------------
 Canvas::Canvas(int a_width, int a_height)
     : width_(a_width)

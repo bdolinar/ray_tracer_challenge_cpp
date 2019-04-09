@@ -19,15 +19,15 @@ Sphere& World::object(int a_object_index)
 }
 
 //------------------------------------------------------------------------------
-void World::add_object(const std::shared_ptr<Sphere>& a_object)
+void World::add_object(std::unique_ptr<Sphere> a_object)
 {
-  objects_.push_back(a_object);
+  objects_.push_back(std::move(a_object));
 }
 
 //------------------------------------------------------------------------------
-void World::set_light(std::shared_ptr<::Light> a_light)
+void World::set_light(std::unique_ptr<::Light> a_light)
 {
-  light_ = a_light;
+  light_ = std::move(a_light);
 }
 
 //------------------------------------------------------------------------------
@@ -75,20 +75,20 @@ World default_world()
 {
   World world;
   auto light = Light::new_ptr(point(-10, 10, -10), Color(1, 1, 1));
-  world.set_light(light);
+  world.set_light(std::move(light));
 
   Material material;
   material.set_color(Color(0.8, 1.0, 0.6));
   material.set_diffuse(0.7);
   material.set_specular(0.2);
 
-  std::shared_ptr<Sphere> s1 = Sphere::new_ptr();
+  std::unique_ptr<Sphere> s1 = Sphere::new_ptr();
   s1->set_material(material);
-  world.add_object(s1);
+  world.add_object(std::move(s1));
 
-  std::shared_ptr<Sphere> s2 = Sphere::new_ptr();
+  std::unique_ptr<Sphere> s2 = Sphere::new_ptr();
   s2->set_transform(scaling(0.5, 0.5, 0.5));
-  world.add_object(s2);
+  world.add_object(std::move(s2));
 
   return world;
 }

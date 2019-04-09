@@ -19,7 +19,7 @@ class Sphere
 public:
   /// Construct a Sphere shared pointer.
   /// \return The Sphere shared pointer.
-  static std::shared_ptr<Sphere> new_ptr();
+  static std::unique_ptr<Sphere> new_ptr();
 
   /// Construct a unit sphere at the origin
   Sphere();
