@@ -13,7 +13,7 @@ class Tuple;
 /// \param a_z_translation The offset to translate z coordinate.
 /// \return The translation transformation matrix.
 Matrix translation(double a_x_translation, double a_y_translation,
-                   double a_z_translation);
+    double a_z_translation);
 
 /// Build transformation matrix for scaling.
 /// \param a_x_scale The factor to scale x coordinate.
@@ -46,7 +46,7 @@ Matrix rotation_z(double a_radians);
 /// \param a_zy Shear of z in proportion to y.
 /// \return The shearing transformation matrix.
 Matrix shearing(double a_xy, double a_xz, double a_yx, double a_yz, double a_zx,
-                double a_zy);
+    double a_zy);
 
 /// Build view transformation matrix.
 /// \param a_look_from The point looked from (where the eye is located).
@@ -55,4 +55,4 @@ Matrix shearing(double a_xy, double a_xz, double a_yx, double a_yz, double a_zx,
 /// \return A transformation matrix that moves the view to default location
 /// (from: (0, 0, 0), to: (0, 0, -1), and up: (0, 1, 0).
 Matrix view_transform(const Tuple& a_look_from, const Tuple& a_look_to,
-                      const Tuple& a_up);
+    const Tuple& a_up);

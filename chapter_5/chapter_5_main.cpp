@@ -30,8 +30,8 @@ int main(int argc, char* argv[])
       double y = 1 - v / HALF_VSIZE;
       Tuple rayVector = (point(x, y, 1.0) - eye).normalize();
       Ray ray(eye, rayVector);
-      const Intersection* hit = hit(sphere.intersect(ray));
-      if (hit)
+      auto i = sphere.intersect(ray);
+      if (!i.empty())
       {
         Color color = red;
         canvas.write_pixel(h, v, color);

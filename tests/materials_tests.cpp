@@ -36,7 +36,8 @@ TEST_CASE("lighting with the eye between the light and the surface", "[materials
   Tuple eyev = vector(0, 0, -1);
   Tuple normalv = vector(0, 0, -1);
   Light light(point(0, 0, -10), Color(1, 1, 1));
-  Color result = lighting(m, light, position, eyev, normalv);
+  bool in_shadow = false;
+  Color result = lighting(m, light, position, eyev, normalv, in_shadow);
   CHECK(result == Color(1.9, 1.9, 1.9));
 }
 
@@ -47,7 +48,8 @@ TEST_CASE("lighting with the eye between light and surface, eye offset 45°", "[
   Tuple eyev = vector(0, sqrt(2)/2, -sqrt(2)/2);
   Tuple normalv = vector(0, 0, -1);
   Light light(point(0, 0, -10), Color(1, 1, 1));
-  Color result = lighting(m, light, position, eyev, normalv);
+  bool in_shadow = false;
+  Color result = lighting(m, light, position, eyev, normalv, in_shadow);
   CHECK(result == Color(1.0, 1.0, 1.0));
 }
 
@@ -58,7 +60,8 @@ TEST_CASE("lighting with eye opposite surface, light offset 45°", "[materials]"
   Tuple eyev = vector(0, 0, -1);
   Tuple normalv = vector(0, 0, -1);
   Light light(point(0, 10, -10), Color(1, 1, 1));
-  Color result = lighting(m, light, position, eyev, normalv);
+  bool in_shadow = false;
+  Color result = lighting(m, light, position, eyev, normalv, in_shadow);
   CHECK(approximately_equal(result, Color(0.7364, 0.7364, 0.7364)));
 }
 
@@ -69,7 +72,8 @@ TEST_CASE("lighting with eye in the path of the reflection vector", "[materials]
   Tuple eyev = vector(0, -sqrt(2)/2, -sqrt(2)/2);
   Tuple normalv = vector(0, 0, -1);
   Light light(point(0, 10, -10), Color(1, 1, 1));
-  Color result = lighting(m, light, position, eyev, normalv);
+  bool in_shadow = false;
+  Color result = lighting(m, light, position, eyev, normalv, in_shadow);
   CHECK(approximately_equal(result, Color(1.6364, 1.6364, 1.6364)));
 }
 
@@ -80,21 +84,24 @@ TEST_CASE("lighting with the light behind the surface", "[materials]")
   Tuple eyev = vector(0, 0, -1);
   Tuple normalv = vector(0, 0, -1);
   Light light(point(0, 0, 10), Color(1, 1, 1));
-  Color result = lighting(m, light, position, eyev, normalv);
+  bool in_shadow = false;
+  Color result = lighting(m, light, position, eyev, normalv, in_shadow);
   CHECK(result == Color(0.1, 0.1, 0.1));
 }
 
-#if 0
 TEST_CASE("Lighting with the surface in shadow", "[materials]")
 {
+  Material m;
+  Tuple position = point(0, 0, 0);
   Tuple eyev = vector(0, 0, -1);
   Tuple normalv = vector(0, 0, -1);
   Light light(point(0, 0, -10), Color(1, 1, 1));
-  auto in_shadow = true;
-  Color result = Lighting(m, light, position, eyev, normalv, in_shadow);
-  CHECK(result == Color(0.1, 0.1, 0.1));
+  bool in_shadow = true;
+  Color result = lighting(m, light, position, eyev, normalv, in_shadow);
+  CHECK(nearly_equal(result, Color(0.1, 0.1, 0.1)));
 }
 
+#if 0
 TEST_CASE("Lighting with a pattern applied", "[materials]")
 {
   auto m.pattern = stripe_pattern(Color(1, 1, 1), Color(0, 0, 0));

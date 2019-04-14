@@ -1,6 +1,8 @@
 #include <catch2/catch.hpp>
 
 #include <raytracer/intersection.h>
+#include <raytracer/transform.h>
+
 
 TEST_CASE("An intersection encapsulates t and object", "[intersections]")
 {
@@ -55,17 +57,18 @@ TEST_CASE("The hit, when an intersection occurs on the inside", "[intersections]
   CHECK(comps.inside);
 }
 
-#if 0
 TEST_CASE("The hit should offset the point", "[intersections]")
 {
   Ray r(point(0, 0, -5), vector(0, 0, 1));
-  auto shape = sphere() with:;
-  Intersection i(5, shape);
-  auto comps = prepare_computations(i, r);
-  comps.over_point.Z() < -EPSILON/2
-  comps.point.Z() > comps.over_point.Z()
+  auto shape = Sphere::new_ptr();
+  shape->set_transform(translation(0, 0, 1));
+  Intersection i(5, *shape);
+  Computations comps = i.prepare_computations(r);
+  CHECK(comps.over_point.z() < -EPSILON/2);
+  CHECK(comps.point.z() > comps.over_point.z());
 }
 
+#if 0
 TEST_CASE("The under point is offset below the surface", "[intersections]")
 {
   Ray r(point(0, 0, -5), vector(0, 0, 1));

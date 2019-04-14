@@ -22,10 +22,10 @@ public:
   /// \param a_specular The amount of specular light (0.0 to 1.0).
   /// \param a_shininess The shininess of the material.
   Material(const class Color& a_color,
-           double a_ambient,
-           double a_diffuse,
-           double a_specular,
-           double a_shininess);
+      double a_ambient,
+      double a_diffuse,
+      double a_specular,
+      double a_shininess);
 
   /// Equals operator.
   /// \param a_rhs The object to compare against.
@@ -86,9 +86,11 @@ private:
 /// \param a_position The point of the intersection.
 /// \param a_to_eye Vector to the eye at the intersection.
 /// \param a_normal Normal at the surface for the intersection.
+/// \param a_in_shadow Is the intersection in a shadow?
 /// \return The resulting color at the intersection.
 Color lighting(const Material& a_material,
-               const Light& a_light,
-               const Tuple& a_position,
-               const Tuple& a_to_eye,
-               const Tuple& a_normal);
+    const Light& a_light,
+    const Tuple& a_position,
+    const Tuple& a_to_eye,
+    const Tuple& a_normal,
+    bool a_in_shadow);

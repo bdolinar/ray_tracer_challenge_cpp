@@ -5,7 +5,7 @@
 
 //------------------------------------------------------------------------------
 Matrix translation(double a_x_translation, double a_y_translation,
-                   double a_z_translation)
+    double a_z_translation)
 {
   Matrix t = Matrix::identity_matrix(4);
   t[0][3] = a_x_translation;
@@ -72,7 +72,7 @@ Matrix rotation_z(double a_radians)
 
 //------------------------------------------------------------------------------
 Matrix shearing(double a_xy, double a_xz, double a_yx, double a_yz, double a_zx,
-                double a_zy)
+    double a_zy)
 {
   Matrix t = Matrix::identity_matrix(4);
   t[0][1] = a_xy;
@@ -86,7 +86,7 @@ Matrix shearing(double a_xy, double a_xz, double a_yx, double a_yz, double a_zx,
 
 //------------------------------------------------------------------------------
 Matrix view_transform(const Tuple& a_look_from, const Tuple& a_look_to,
-                      const Tuple& a_up)
+    const Tuple& a_up)
 {
   Tuple forward = (a_look_to - a_look_from).normalize();
   Tuple upn = a_up.normalize();

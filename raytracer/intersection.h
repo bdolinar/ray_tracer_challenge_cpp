@@ -10,6 +10,8 @@ class Computations;
 
 class Sphere;
 
+const double EPSILON = 1.0e-5;
+
 /// Data for an object and ray intersection.
 class Intersection
 {
@@ -67,6 +69,7 @@ struct Computations
   Tuple to_eye;                   ///< Vector directed to eye.
   Tuple normal;                   ///< Normal vector on object surface.
   bool inside = false;            ///< Did the ray come from inside the object?
+  Tuple over_point;               ///< Above surface for rounding errors.
 };
 
 /// find the first intersection in the positive direction.

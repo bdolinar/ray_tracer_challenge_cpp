@@ -50,9 +50,10 @@ std::vector<Intersection> World::intersect(const Ray& a_ray) const
 //------------------------------------------------------------------------------
 Color World::shade_hit(const Computations& a_computations) const
 {
+  bool shadowed = is_shadowed(a_computations.over_point);
   return lighting(a_computations.object->material(), *light_,
                   a_computations.point, a_computations.to_eye,
-                  a_computations.normal);
+                  a_computations.normal, shadowed);
 }
 
 //------------------------------------------------------------------------------
@@ -68,6 +69,19 @@ Color World::color_at(const Ray& a_ray) const
   }
 
   return color;
+}
+
+bool World::is_shadowed(const Tuple& a_point) const
+{
+  Tuple to_light = light_->position() - a_point;
+  double distance = to_light.magnitude();
+  Tuple direction = to_light.normalize();
+  Ray ray(a_point, direction);
+  Intersections intersections = intersect(ray);
+  const Intersection* intersection = hit(intersections);
+  if (intersection && intersection->t() < distance)
+    return true;
+  return false;
 }
 
 //------------------------------------------------------------------------------

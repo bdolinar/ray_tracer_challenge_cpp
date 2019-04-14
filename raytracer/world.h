@@ -53,6 +53,11 @@ public:
   /// \return  The color where the ray hits the world.
   Color color_at(const Ray& a_ray) const;
 
+  /// Determine if a point is in the shadow of an object.
+  /// \param a_point The point to check for being in a shadow.
+  /// \return True if the point is in a shadow.
+  bool is_shadowed(const Tuple& a_point) const;
+
 private:
   std::vector<std::unique_ptr<Sphere>> objects_; ///< The worlds objects.
   std::unique_ptr<::Light> light_;               ///< The worlds light.

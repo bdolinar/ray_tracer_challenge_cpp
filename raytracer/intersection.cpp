@@ -38,5 +38,7 @@ Computations Intersection::prepare_computations(const Ray& a_ray) const
   {
     inside = false;
   }
-  return {t_value, object_value, point, to_eye, normal, inside};
+  Tuple over_point = point + normal * EPSILON;
+
+  return {t_value, object_value, point, to_eye, normal, inside, over_point};
 }

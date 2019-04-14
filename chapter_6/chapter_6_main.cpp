@@ -38,13 +38,13 @@ int main(int argc, char* argv[])
       double y = 1 - v / HALF_VSIZE;
       Tuple rayVector = (point(x, y, 1.0) - eyePoint).normalize();
       Ray ray(eyePoint, rayVector);
-      const Intersection* hit = hit(sphere.intersect(ray));
-      if (hit)
+      const Intersection* intersection = hit(sphere.intersect(ray));
+      if (intersection)
       {
-        Tuple point = ray.position(hit->t());
-        Tuple normal = hit->object().normal_at(point);
+        Tuple point = ray.position(intersection->t());
+        Tuple normal = intersection->object().normal_at(point);
         Tuple eyeVector = -ray.direction();
-        Color color = lighting(hit->object().material(), light, point, eyeVector, normal);
+        Color color = lighting(intersection->object().material(), light, point, eyeVector, normal);
         canvas.write_pixel(h, v, color);
       }
       else
