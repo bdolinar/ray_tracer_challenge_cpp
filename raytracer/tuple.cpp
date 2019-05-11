@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <tuple>
 #include <raytracer/test_utils.h>
 
 

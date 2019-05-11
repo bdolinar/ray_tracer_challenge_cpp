@@ -1,5 +1,6 @@
 #include <raytracer/world.h>
 
+#include <algorithm>
 #include <raytracer/intersection.h>
 #include <raytracer/material.h>
 #include <raytracer/sphere.h>
