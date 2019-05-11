@@ -1,3 +1,5 @@
+#include <memory>
+
 #include <raytracer/sphere.h>
 
 #include <algorithm>
@@ -8,7 +10,7 @@
 //------------------------------------------------------------------------------
 std::unique_ptr<Sphere> Sphere::new_ptr()
 {
-  return std::unique_ptr<Sphere>(new Sphere);
+  return std::make_unique<Sphere>();
 }
 
 

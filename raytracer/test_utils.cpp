@@ -14,7 +14,8 @@ bool approximately_equal(double a_lhs, double a_rhs)
 //------------------------------------------------------------------------------
 bool nearly_equal(double a_lhs, double a_rhs)
 {
-  bool equal = equal_to_digits(a_lhs, a_rhs, 10);
+  bool equal;
+  equal = equal_to_digits(a_lhs, a_rhs, 10);
   return equal;
 }
 

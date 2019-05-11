@@ -36,8 +36,8 @@ int main(int argc, char* argv[])
     for (int v = 0; v <= VSIZE; ++v)
     {
       double y = 1 - v / HALF_VSIZE;
-      Tuple rayVector = (point(x, y, 1.0) - eyePoint).normalize();
-      Ray ray(eyePoint, rayVector);
+      Tuple direction = (point(x, y, 1.0) - eyePoint).normalize();
+      Ray ray(eyePoint, direction);
       const Intersection* intersection = hit(sphere.intersect(ray));
       if (intersection)
       {

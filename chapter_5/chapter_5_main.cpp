@@ -28,8 +28,8 @@ int main(int argc, char* argv[])
     for (int v = 0; v <= VSIZE; ++v)
     {
       double y = 1 - v / HALF_VSIZE;
-      Tuple rayVector = (point(x, y, 1.0) - eye).normalize();
-      Ray ray(eye, rayVector);
+      Tuple direction = (point(x, y, 1.0) - eye).normalize();
+      Ray ray(eye, direction);
       auto i = sphere.intersect(ray);
       if (!i.empty())
       {
