@@ -55,8 +55,8 @@ set(test_sources
         tests/tuples_tests.cpp
         tests/world_tests.cpp)
 
-add_executable(tests ${test_sources})
-target_link_libraries(tests raytracer)
+add_executable(run_tests ${test_sources})
+target_link_libraries(run_tests raytracer)
 
 add_executable(chapter_5 chapter_5/chapter_5_main.cpp)
 target_link_libraries(chapter_5 raytracer)
