@@ -19,5 +19,6 @@ before_install:
 script:
   - cmake --version
   - cmake CMakeLists.txt
-  - cmake  --build . --target run_tests
+  - #cmake  --build . --target run_tests
+  - make run_tests VERBOSE=1
   - ./run_tests
