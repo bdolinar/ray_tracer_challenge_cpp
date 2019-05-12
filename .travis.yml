@@ -6,19 +6,17 @@ matrix:
     - os: osx
       osx_image: xcode10.2
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - MATRIX_EVAL="CMAKE_C_COMPILER=clang && CMAKE_CXX_COMPILER=clang++"
 
     - os: osx
       osx_image: xcode10.2
       env:
-        - MATRIX_EVAL="brew install gcc && CC=gcc-7 && CXX=g++-7"
+        - MATRIX_EVAL="CC=gcc && CXX=g++"
 
 before_install:
     - eval "${MATRIX_EVAL}"
 
 script:
-  - export CC=gcc-7
-  - export CXX=g++-7
   - cmake --version
   - cmake CMakeLists.txt
   - cmake  --build . --target run_tests
