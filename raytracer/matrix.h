@@ -4,6 +4,9 @@
 
 #include <raytracer/tuple.h>
 
+#undef minor
+#undef major
+
 
 /// A row in a matrix.
 class MatrixRow
